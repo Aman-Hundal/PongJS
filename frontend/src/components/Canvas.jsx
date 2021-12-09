@@ -6,16 +6,31 @@ const Canvas = function(props) {
   // const {} = props;
   const fps = 30;
   const canvasRef = useRef(null);
+  const ballRef = useRef({x: 700, y: 400, r: 10})
+
+  // const updateBall = () => {
+  //   const ball = ballRef.current;
+  //   ball.x++
+  //   console.log(ball.x)
+
+  // };
+
+
+  const renderBall = (context, ball) => {
+    //ball
+    createBoard(context);
+    context.fillStyle = 'white';
+    context.beginPath();
+    context.arc(ball.x, ball.y, ball.r, 0, 2*Math.PI, true);
+    context.fill();
+
+  }
+
   const createBoard = (context) => {
     //board
     context.fillStyle = 'black';
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
 
-    //ball
-    context.fillStyle = 'white';
-    context.beginPath();
-    context.arc(700, 400, 10, 0, 2*Math.PI, true);
-    context.fill();
 
     //paddle 1
     context.fillStyle = 'white';
@@ -29,10 +44,19 @@ const Canvas = function(props) {
 
   };
 
+
+
   useEffect(()=> { //need a useEffect to control/trigger side effects for our components. We want to call/use this code after our Canvas component is rendered -> useEffect allows for this
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
     createBoard(context);
+    setInterval(function() {
+      ballRef.current.x++
+      console.log(ballRef.current)
+      renderBall(context, ballRef.current);
+    }, 1000/fps);
+
+    
   }, []) //empty array says we only want to trigger this function once
 
   return(

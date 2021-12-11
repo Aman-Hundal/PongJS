@@ -7,30 +7,25 @@ const Canvas = function(props) {
   const fps = 30;
   const canvasRef = useRef(null);
   const ballRef = useRef({x: 700, y: 400, r: 10})
-
-  // const updateBall = () => {
-  //   const ball = ballRef.current;
-  //   ball.x++
-  //   console.log(ball.x)
-
-  // };
-
-
-  const renderBall = (context, ball) => {
-    //ball
+  var ballSpeedX = 10;
+  var ballSpeedY = 10;
+  
+  const renderAll = (context, ball) => {
     createBoard(context);
+    //ball
+    context.save();
+    context.beginPath(); //general routine for howd you fill any shape
     context.fillStyle = 'white';
-    context.beginPath();
     context.arc(ball.x, ball.y, ball.r, 0, 2*Math.PI, true);
-    context.fill();
-
-  }
+    context.fill(); //general routine for howd you fill any shape
+    context.closePath();
+    context.restore();
+  };
 
   const createBoard = (context) => {
     //board
     context.fillStyle = 'black';
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-
 
     //paddle 1
     context.fillStyle = 'white';
@@ -44,19 +39,36 @@ const Canvas = function(props) {
 
   };
 
+  const updateAll = function(context) {
+    setInterval(function() {
+      ballRef.current.x += ballSpeedX;
+      ballRef.current.y += ballSpeedY;
 
+      if (ballRef.current.x < 0) {
+        ballSpeedX *= -1;
+      }
+      if (ballRef.current.x > context.canvas.width) {
+        ballSpeedX *= -1;
+      }
+
+      if (ballRef.current.y < 0) {
+        ballSpeedY *= -1;
+      }
+      if (ballRef.current.y > context.canvas.height) {
+        ballSpeedY *= -1;
+      }
+
+      renderAll(context, ballRef.current);
+    }, 1000/fps);
+  };
 
   useEffect(()=> { //need a useEffect to control/trigger side effects for our components. We want to call/use this code after our Canvas component is rendered -> useEffect allows for this
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
-    createBoard(context);
-    setInterval(function() {
-      ballRef.current.x++
-      console.log(ballRef.current)
-      renderBall(context, ballRef.current);
-    }, 1000/fps);
-
     
+    createBoard(context)
+    updateAll(context);
+
   }, []) //empty array says we only want to trigger this function once
 
   return(

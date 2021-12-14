@@ -6,14 +6,16 @@ const Canvas = function(props) {
   // const {} = props;
   // const fps = 30;
   const canvasRef = useRef(null);
-  const ballRef = useRef({x: 700, y: 400, r: 10});
-  const paddleRRef = useRef({x: 1360, y: 320, w: 11.2, h:136 })
+  const ballRef = useRef({x: 700, y: 400, r: 10, speedX: 15, speedY: 7});
+  const paddleRRef = useRef({x: 1360, y: 320, w: 11.2, h: 136, speedY: 7 })
+  const paddleLRef = useRef({x: 25, y: 320, w: 11.2, h: 136, speedY: 20 })
   let ballSpeedX = 15;
   let ballSpeedY = 7;
-  let paddleSpeedY = 7;
+  let paddleRSpeedY = 7;
+  let paddleLSpeedY = 20;
   console.log(paddleRRef)
 
-  const createBoard = (context, ball, paddle) => {
+  const createBoard = (context, ball, rightPaddle, leftPaddle) => {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     
     //ball
@@ -24,12 +26,12 @@ const Canvas = function(props) {
 
     //paddle 1
     context.fillStyle = 'white';
-    context.fillRect((context.canvas.width - 1375), (context.canvas.height * .40), (context.canvas.width * .008), (context.canvas.height * .17));
+    context.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.w, leftPaddle.h);
     context.fill();
 
     //paddle 2
     context.fillStyle = 'white';
-    context.fillRect(paddle.x, paddle.y, paddle.w, paddle.h);
+    context.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.w, rightPaddle.h);
     context.fill();
   
   };
@@ -59,23 +61,36 @@ const Canvas = function(props) {
   };
 
   const updatePaddleR = function(context, paddle) {
-    paddle.y += paddleSpeedY;
+    paddle.y += paddleRSpeedY;
 
     if (paddle.y >= context.canvas.height-136) {
-      paddleSpeedY *= -1;
+      paddleRSpeedY *= -1;
     }
 
     if (paddle.y <= 0) {
-      paddleSpeedY *= -1;
+      paddleRSpeedY *= -1;
     }
   };
+
+  const moveLeftPaddle = (paddle, key) => {
+    
+    if (key === "s" && paddle.y !== 660) {
+      paddle.y += paddleLSpeedY;
+    }
+
+    if (key === "w" && paddle.y !== 0) {
+      paddle.y -= paddleLSpeedY;
+    }
+  
+
+  }
 
   const render = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
     updateBall(context, ballRef.current);
     updatePaddleR(context, paddleRRef.current);
-    createBoard(context, ballRef.current, paddleRRef.current);
+    createBoard(context, ballRef.current, paddleRRef.current, paddleLRef.current);
     requestAnimationFrame(render);
   }
 
@@ -86,7 +101,7 @@ const Canvas = function(props) {
   }, []) //empty array says we only want to trigger this function once
 
   return(
-    <canvas width="1400" height="800" id="game-board" ref={canvasRef}>
+    <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => moveLeftPaddle(paddleLRef.current, event.key)}>
     </canvas>
   )
 };

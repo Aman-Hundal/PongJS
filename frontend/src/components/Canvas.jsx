@@ -9,10 +9,6 @@ const Canvas = function(props) {
   const ballRef = useRef({x: 700, y: 400, r: 10, speedX: 15, speedY: 7});
   const paddleRRef = useRef({x: 1360, y: 320, w: 11.2, h: 136, speedY: 7 })
   const paddleLRef = useRef({x: 25, y: 320, w: 11.2, h: 136, speedY: 20 })
-  let ballSpeedX = 15;
-  let ballSpeedY = 7;
-  let paddleRSpeedY = 7;
-  let paddleLSpeedY = 20;
   console.log(paddleRRef)
 
   const createBoard = (context, ball, rightPaddle, leftPaddle) => {
@@ -37,49 +33,49 @@ const Canvas = function(props) {
   };
 
   const updateBall = function(context, ball) {
-    ball.x += ballSpeedX;
-    ball.y += ballSpeedY;
+    ball.x += ball.speedX;
+    ball.y += ball.speedY;
 
     if (ball.x - ball.r  <= 0) {
-      ballSpeedX *= -1;
+      ball.speedX *= -1;
       ball.x = ball.r;
     }
 
     if (ball.x + ball.r >= context.canvas.width) {
-      ballSpeedX *= -1;
+      ball.speedX *= -1;
       ball.x = context.canvas.width - ball.r;
     }
 
     if (ball.y - ball.r  <= 0) {
-      ballSpeedY *= -1;
+      ball.speedY *= -1;
       ball.y = ball.r;
     }
     if (ball.y + ball.r >= context.canvas.height) {
-      ballSpeedY *= -1;
+      ball.speedY *= -1;
       ball.y = context.canvas.height - ball.r;
     }
   };
 
   const updatePaddleR = function(context, paddle) {
-    paddle.y += paddleRSpeedY;
+    paddle.y += paddle.speedY;
 
     if (paddle.y >= context.canvas.height-136) {
-      paddleRSpeedY *= -1;
+      paddle.speedY *= -1;
     }
 
     if (paddle.y <= 0) {
-      paddleRSpeedY *= -1;
+      paddle.speedY *= -1;
     }
   };
 
   const moveLeftPaddle = (paddle, key) => {
     
     if (key === "s" && paddle.y !== 660) {
-      paddle.y += paddleLSpeedY;
+      paddle.y += paddle.speedY;
     }
 
     if (key === "w" && paddle.y !== 0) {
-      paddle.y -= paddleLSpeedY;
+      paddle.y -= paddle.speedY;
     }
   
 

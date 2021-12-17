@@ -6,8 +6,8 @@ const Canvas = function(props) {
   // const {} = props;
   // const fps = 30;
   const canvasRef = useRef(null);
-  const ballRef = useRef({x: 700, y: 400, r: 10, speedX: 20, speedY: 7}); //10 best, 14 max, 7 slow, 20 super
-  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, speedY: 7 })
+  const ballRef = useRef({x: 700, y: 400, r: 10, speedX: 10, speedY: 7}); //10 best, 14 max, 7 slow, 20 super
+  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, speedY: 15 }) //computer speed 15-20
   const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, speedY: 40 })
   console.log(paddleRRef)
 
@@ -34,7 +34,30 @@ const Canvas = function(props) {
   
   };
 
-  const updateBall = function(context, ball, paddle) {
+  const ballPaddleCollision = (ball, paddle) => {
+    const distX = Math.abs(ball.x - paddle.x-paddle.w/2)
+    const distY = Math.abs(ball.y - paddle.y-paddle.h/2)
+
+    if (distX > (paddle.w/2 + ball.r)) { 
+      return false; 
+    }
+    if (distY > (paddle.h/2 + ball.r)) { 
+      return false; 
+    }
+
+    if (distX <= (paddle.w/2)) {
+      return true;
+    }
+    if (distY <= (paddle.h/2)) {
+      return true;
+    }
+
+    const dx = distX - paddle.w/2;
+    const dy = distY - paddle.h/2;
+    return (dx*dx+dy*dy<=(ball.r*ball.r));
+  }
+
+  const updateBall = function(context, ball, paddleLeft, paddleRight) {
     ball.x += ball.speedX;
     ball.y += ball.speedY;
 
@@ -45,9 +68,9 @@ const Canvas = function(props) {
     }
 
     if (ball.x + ball.r > context.canvas.width) {
-      ball.speedX *= -1;
-      ball.x = context.canvas.width - ball.r;
-      // ballReset(ball, context)
+      // ball.speedX *= -1;
+      // ball.x = context.canvas.width - ball.r;
+      ballReset(ball, context)
     }
 
     if (ball.y - ball.r  <= 0) {
@@ -61,12 +84,11 @@ const Canvas = function(props) {
     }
 
     //paddle collision
-    const topOfPaddle = paddle.y
-    const bottomOfPaddle = topOfPaddle + paddle.h
-    const leftofPaddle = paddle.x
-    const rightofPaddle = paddle.x + paddle.w
-    
-    if (ball.y > topOfPaddle && ball.y < bottomOfPaddle && ball.x > leftofPaddle && ball.x < rightofPaddle) {
+    if (ballPaddleCollision(ball, paddleLeft)) {
+      ball.speedX *= -1;
+    }
+
+    if (ballPaddleCollision(ball, paddleRight)) {
       ball.speedX *= -1;
     }
 
@@ -89,28 +111,39 @@ const Canvas = function(props) {
   const ballReset = (ball, context) => {
     ball.x = context.canvas.width/2;
     ball.y = context.canvas.height/2;
-    ball.speedX *= -1;
+    // ball.speedX *= -1;
+    ball.speedY *= 0;
+    ball.speedX *= 0;
   }
 
-  const moveLeftPaddle = (paddle, key) => {
+  const movePaddle = (paddleLeft, paddleRight, key) => {
 
-    if (key === "s" && paddle.y < 640) {
-      paddle.y += 40
-      console.log(paddle)
+    if (key === "s" && paddleLeft.y < 640) {
+      paddleLeft.y += paddleLeft.speedY;
+      // console.log(paddleLeft)
     }
 
-    if (key === "w" && paddle.y > 0) {
-      paddle.y -= 40
-      console.log(paddle)
+    if (key === "w" && paddleLeft.y > 0) {
+      paddleLeft.y -= paddleLeft.speedY;
+      // console.log(paddle)
+    }
+
+    if (key === "ArrowDown" && paddleRight.y < 640) {
+      paddleRight.y += paddleRight.speedY;
+      // console.log(paddleLeft)
+    }
+
+    if (key === "ArrowUp" && paddleRight.y > 0) {
+      paddleRight.y -= paddleRight.speedY;
+      // console.log(paddle)
     }
   
-
   }
 
   const render = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
-    updateBall(context, ballRef.current, paddleLRef.current);
+    updateBall(context, ballRef.current, paddleLRef.current, paddleRRef.current);
     updatePaddleR(context, paddleRRef.current);
     createBoard(context, ballRef.current, paddleRRef.current, paddleLRef.current);
     requestAnimationFrame(render);
@@ -123,7 +156,7 @@ const Canvas = function(props) {
   }, []) //empty array says we only want to trigger this function once
 
   return(
-    <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => moveLeftPaddle(paddleLRef.current, event.key)}>
+    <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => movePaddle(paddleLRef.current,paddleRRef.current, event.key)}>
     </canvas>
   )
 };

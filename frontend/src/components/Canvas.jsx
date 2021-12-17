@@ -7,9 +7,8 @@ const Canvas = function(props) {
   // const fps = 30;
   const canvasRef = useRef(null);
   const ballRef = useRef({x: 700, y: 400, r: 10, speedX: 10, speedY: 7}); //10 best, 14 max, 7 slow, 20 super
-  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, speedY: 15 }) //computer speed 15-20
-  const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, speedY: 40 })
-  console.log(paddleRRef)
+  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, speedY: 15 }); //computer speed 15-20
+  const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, speedY: 40 });
 
   const createBoard = (context, ball, rightPaddle, leftPaddle) => {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -35,8 +34,8 @@ const Canvas = function(props) {
   };
 
   const ballPaddleCollision = (ball, paddle) => {
-    const distX = Math.abs(ball.x - paddle.x-paddle.w/2)
-    const distY = Math.abs(ball.y - paddle.y-paddle.h/2)
+    const distX = Math.abs(ball.x - paddle.x-paddle.w/2);
+    const distY = Math.abs(ball.y - paddle.y-paddle.h/2);
 
     if (distX > (paddle.w/2 + ball.r)) { 
       return false; 
@@ -64,13 +63,13 @@ const Canvas = function(props) {
     if (ball.x - ball.r  < 0) {
       // ball.speedX *= -1;
       // ball.x = ball.r;
-      ballReset(ball, context)
+      ballReset(ball, context);
     }
 
     if (ball.x + ball.r > context.canvas.width) {
       // ball.speedX *= -1;
       // ball.x = context.canvas.width - ball.r;
-      ballReset(ball, context)
+      ballReset(ball, context);
     }
 
     if (ball.y - ball.r  <= 0) {
@@ -83,13 +82,20 @@ const Canvas = function(props) {
       ball.y = context.canvas.height - ball.r;
     }
 
-    //paddle collision
+    //paddle collision - WIP
     if (ballPaddleCollision(ball, paddleLeft)) {
       ball.speedX *= -1;
+      const centerOfPaddle = paddleLeft.x + paddleLeft.w/2;
+      const x = ball.y - centerOfPaddle;
+      ball.speedY = x * .01;
     }
 
     if (ballPaddleCollision(ball, paddleRight)) {
       ball.speedX *= -1;
+      const centerOfPaddle = paddleRight.x + paddleRight.w/2;
+      const x = ball.y - centerOfPaddle;
+      ball.speedY = x * .01;
+
     }
 
   };
@@ -111,9 +117,8 @@ const Canvas = function(props) {
   const ballReset = (ball, context) => {
     ball.x = context.canvas.width/2;
     ball.y = context.canvas.height/2;
-    // ball.speedX *= -1;
-    ball.speedY *= 0;
-    ball.speedX *= 0;
+    //generate random number between 7-10 * random value of -1 or 1
+    ball.speedX *= -1;
   }
 
   const movePaddle = (paddleLeft, paddleRight, key) => {

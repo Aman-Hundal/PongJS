@@ -6,9 +6,9 @@ const Canvas = function(props) {
   // const {} = props;
   // const fps = 30;
   const canvasRef = useRef(null);
-  const ballRef = useRef({x: 700, y: 400, r: 10, speedX: 10, speedY: 7}); //10 best, 14 max, 7 slow, 20 super
-  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, speedY: 15 }); //computer speed 15-20
-  const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, speedY: 40 });
+  const ballRef = useRef({x: 700, y: 400, r: 10, vx: 5, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
+  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 20 }); //computer speed 15-20
+  const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, vy: 40 });
 
   const createBoard = (context, ball, rightPaddle, leftPaddle) => {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -34,112 +34,123 @@ const Canvas = function(props) {
   };
 
   const ballPaddleCollision = (ball, paddle) => {
-    const distX = Math.abs(ball.x - paddle.x-paddle.w/2);
-    const distY = Math.abs(ball.y - paddle.y-paddle.h/2);
 
-    if (distX > (paddle.w/2 + ball.r)) { 
-      return false; 
-    }
-    if (distY > (paddle.h/2 + ball.r)) { 
-      return false; 
-    }
+    const paddleTop = paddle.y;
+    const paddleBottom = paddle.y + paddle.h;
+    const paddleLeft = paddle.x;
+    const paddleRight = paddle.x + paddle.w;
 
-    if (distX <= (paddle.w/2)) {
+    const ballTop = ball.y - ball.r;
+    const ballBottom = ball.y + ball.r;
+    const ballLeft = ball.x - ball.r;
+    const ballRight = ball.x + ball.r;
+
+    if (ballRight > paddleLeft && ballLeft < paddleRight && ballBottom > paddleTop && ballTop < paddleBottom) {
       return true;
+    } else {
+      return false;
     }
-    if (distY <= (paddle.h/2)) {
-      return true;
-    }
-
-    const dx = distX - paddle.w/2;
-    const dy = distY - paddle.h/2;
-    return (dx*dx+dy*dy<=(ball.r*ball.r));
   }
 
   const updateBall = function(context, ball, paddleLeft, paddleRight) {
-    ball.x += ball.speedX;
-    ball.y += ball.speedY;
+    ball.x += ball.vx;
+    ball.y += ball.vy;
 
     if (ball.x - ball.r  < 0) {
-      // ball.speedX *= -1;
-      // ball.x = ball.r;
       ballReset(ball, context);
     }
 
     if (ball.x + ball.r > context.canvas.width) {
-      // ball.speedX *= -1;
-      // ball.x = context.canvas.width - ball.r;
       ballReset(ball, context);
     }
 
     if (ball.y - ball.r  <= 0) {
-      ball.speedY *= -1;
-      ball.y = ball.r;
+      ball.vy *= -1;
     }
     
     if (ball.y + ball.r >= context.canvas.height) {
-      ball.speedY *= -1;
-      ball.y = context.canvas.height - ball.r;
+      ball.vy *= -1;
     }
 
-    //paddle collision - WIP
+    //paddle collision
     if (ballPaddleCollision(ball, paddleLeft)) {
-      ball.speedX *= -1;
-      const centerOfPaddle = paddleLeft.x + paddleLeft.w/2;
-      const x = ball.y - centerOfPaddle;
-      ball.speedY = x * .01;
-    }
+      ball.speed += 1;
+      console.log(ball.speed)
+      let collidePoint = (ball.y - (paddleLeft.y + paddleLeft.h/2));
+      collidePoint = collidePoint / (paddleLeft.h/2); //normalizing collide point between -1 and 1
+      let angle = collidePoint * (Math.PI / 4);
 
+      if (ball.vx > 0) {
+        ball.vx = -ball.speed * Math.cos(angle);
+        ball.vy = ball.speed * Math.sin(angle);
+      }
+
+      ball.vx = ball.speed * Math.cos(angle);
+      ball.vy = ball.speed * Math.sin(angle);
+
+    }
+    
     if (ballPaddleCollision(ball, paddleRight)) {
-      ball.speedX *= -1;
-      const centerOfPaddle = paddleRight.x + paddleRight.w/2;
-      const x = ball.y - centerOfPaddle;
-      ball.speedY = x * .01;
+      ball.speed += 1
+      console.log(ball.speed)
+      let collidePoint = (ball.y - (paddleRight.y + paddleRight.h/2));
+      collidePoint = collidePoint / (paddleRight.h/2); //normalizing collide point between -1 and 1
+      let angle = collidePoint * (Math.PI / 4);
 
+      if (ball.vx < 0) {
+        ball.vx = ball.speed * Math.cos(angle);
+        ball.vy = ball.speed * Math.sin(angle);
+      }
+
+      ball.vx = -ball.speed * Math.cos(angle);
+      ball.vy = ball.speed * Math.sin(angle);
     }
-
   };
 
   const updatePaddleR = function(context, paddle) {
-    paddle.y += paddle.speedY;
+    paddle.y += paddle.vy;
 
     if (paddle.y >= context.canvas.height-160) {
-      paddle.speedY *= -1;
+      paddle.vy *= -1;
       // console.log(paddle)
     }
 
     if (paddle.y <= 0) {
-      paddle.speedY *= -1;
+      paddle.vy *= -1;
       // console.log(paddle)
     }
   };
 
   const ballReset = (ball, context) => {
+    const direction = [1, -1];
     ball.x = context.canvas.width/2;
     ball.y = context.canvas.height/2;
-    //generate random number between 7-10 * random value of -1 or 1
-    ball.speedX *= -1;
+    ball.vx = 5 * direction[Math.floor(Math.random() * direction.length)];
+    ball.vy = 0;
+    ball.speed = 5;
   }
 
   const movePaddle = (paddleLeft, paddleRight, key) => {
+    const paddleTop = paddleLeft.y;
+    const paddleBottom = paddleLeft.y + paddleLeft.h;
 
-    if (key === "s" && paddleLeft.y < 640) {
-      paddleLeft.y += paddleLeft.speedY;
+    if (key === "s" && paddleBottom < 800) {
+      paddleLeft.y += paddleLeft.vy;
       // console.log(paddleLeft)
     }
 
-    if (key === "w" && paddleLeft.y > 0) {
-      paddleLeft.y -= paddleLeft.speedY;
+    if (key === "w" && paddleTop > 0) {
+      paddleLeft.y -= paddleLeft.vy;
       // console.log(paddle)
     }
 
     if (key === "ArrowDown" && paddleRight.y < 640) {
-      paddleRight.y += paddleRight.speedY;
+      paddleRight.y += paddleRight.vy;
       // console.log(paddleLeft)
     }
 
     if (key === "ArrowUp" && paddleRight.y > 0) {
-      paddleRight.y -= paddleRight.speedY;
+      paddleRight.y -= paddleRight.vy;
       // console.log(paddle)
     }
   

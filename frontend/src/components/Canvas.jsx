@@ -6,8 +6,8 @@ const Canvas = function(props) {
   // const {} = props;
   // const fps = 30;
   const canvasRef = useRef(null);
-  const ballRef = useRef({x: 700, y: 400, r: 10, vx: 5, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
-  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 20 }); //computer speed 15-20
+  const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
+  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 0 }); //computer speed 15-20
   const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, vy: 40 });
 
   const createBoard = (context, ball, rightPaddle, leftPaddle) => {
@@ -57,11 +57,11 @@ const Canvas = function(props) {
     ball.y += ball.vy;
 
     if (ball.x - ball.r  < 0) {
-      ballReset(ball, context);
+      ballReset(ball, context, paddleRight, paddleLeft);
     }
 
     if (ball.x + ball.r > context.canvas.width) {
-      ballReset(ball, context);
+      ballReset(ball, context, paddleRight, paddleLeft);
     }
 
     if (ball.y - ball.r  <= 0) {
@@ -83,10 +83,12 @@ const Canvas = function(props) {
       if (ball.vx > 0) {
         ball.vx = -ball.speed * Math.cos(angle);
         ball.vy = ball.speed * Math.sin(angle);
+        console.log(ball)
       }
 
       ball.vx = ball.speed * Math.cos(angle);
       ball.vy = ball.speed * Math.sin(angle);
+      console.log(ball)
 
     }
     
@@ -100,10 +102,12 @@ const Canvas = function(props) {
       if (ball.vx < 0) {
         ball.vx = ball.speed * Math.cos(angle);
         ball.vy = ball.speed * Math.sin(angle);
+        console.log(ball)
       }
 
       ball.vx = -ball.speed * Math.cos(angle);
       ball.vy = ball.speed * Math.sin(angle);
+      console.log(ball)
     }
   };
 
@@ -121,16 +125,31 @@ const Canvas = function(props) {
     }
   };
 
-  const ballReset = (ball, context) => {
-    const direction = [1, -1];
+  const ballReset = (ball, context, paddleRight, paddleLeft) => {
     ball.x = context.canvas.width/2;
     ball.y = context.canvas.height/2;
+    ball.vx = 0;
+    ball.vy = 0;
+    ball.speed = 5;
+    paddleRight.y = 320;
+    paddleRight.vy = 0;
+    paddleLeft.y = 320;
+
+    console.log(ball)
+    console.log(paddleLeft)
+    console.log(paddleRight)
+  }
+
+  const startGame = (ball, paddle) => {
+    const direction = [1, -1];
     ball.vx = 5 * direction[Math.floor(Math.random() * direction.length)];
     ball.vy = 0;
     ball.speed = 5;
+    paddle.vy = 20;
   }
 
-  const movePaddle = (paddleLeft, paddleRight, key) => {
+
+  const userInput = (paddleLeft, paddleRight, ball, key) => {
     const paddleTop = paddleLeft.y;
     const paddleBottom = paddleLeft.y + paddleLeft.h;
 
@@ -153,6 +172,10 @@ const Canvas = function(props) {
       paddleRight.y -= paddleRight.vy;
       // console.log(paddle)
     }
+
+    if(key === "Enter" && ball.vx === 0 && paddleRight.vy === 0) {
+      startGame(ball, paddleRight);
+    }
   
   }
 
@@ -172,7 +195,7 @@ const Canvas = function(props) {
   }, []) //empty array says we only want to trigger this function once
 
   return(
-    <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => movePaddle(paddleLRef.current,paddleRRef.current, event.key)}>
+    <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
     </canvas>
   )
 };

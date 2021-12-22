@@ -14,15 +14,15 @@ export default function Leaderboard(props) {
       <Table sx={{ width: 600, margin:'auto', background: "black"}} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{color: "white"}}>Username</TableCell>
-            <TableCell sx={{color: "white"}}> Score</TableCell>
+            <TableCell sx={{color: "white"}}><strong>Username</strong></TableCell>
+            <TableCell sx={{color: "white"}}><strong>Score</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {users.map((user) => (
             <TableRow key={user.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell sx={{color: "white"}}>{user.name}</TableCell>
-              <TableCell sx={{color: "white"}}>{user.score}</TableCell>
+              <TableCell sx={{color: "white"}}>{user.score} points</TableCell>
             </TableRow>
           ))}
         </TableBody>

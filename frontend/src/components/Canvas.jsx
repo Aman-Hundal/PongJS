@@ -1,6 +1,5 @@
 import { useRef, useEffect } from 'react'; //useRef allows us to get a dom element in React. Refs provide a way to access DOM nodes or React elements created in the render method
 import './styles/Canvas.css';
-//https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258
 
 const Canvas = function(props) {
   // const {} = props;

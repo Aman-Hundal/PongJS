@@ -1,8 +1,9 @@
 import { useRef, useEffect } from 'react'; //useRef allows us to get a dom element in React. Refs provide a way to access DOM nodes or React elements created in the render method
 import './styles/Canvas.css';
+import Score from "./Score";
 
 const Canvas = function(props) {
-  // const {} = props;
+  const {scoreP1, scoreP2, increaseScoreP1, increaseScoreP2} = props;
   // const fps = 30;
   const canvasRef = useRef(null);
   const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
@@ -57,10 +58,12 @@ const Canvas = function(props) {
 
     if (ball.x - ball.r  < 0) {
       ballReset(ball, context, paddleRight, paddleLeft);
+      increaseScoreP2();
     }
 
     if (ball.x + ball.r > context.canvas.width) {
       ballReset(ball, context, paddleRight, paddleLeft);
+      increaseScoreP1();
     }
 
     if (ball.y - ball.r  <= 0) {
@@ -194,8 +197,11 @@ const Canvas = function(props) {
   }, []) //empty array says we only want to trigger this function once
 
   return(
+    <div>
+    <Score scoreP1={scoreP1} scoreP2={scoreP2} />
     <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
     </canvas>
+    </div>
   )
 };
 

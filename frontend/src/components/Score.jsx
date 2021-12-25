@@ -1,3 +1,4 @@
+
 const Score = (props) => {
   const {scoreP1, scoreP2} = props;
   return (

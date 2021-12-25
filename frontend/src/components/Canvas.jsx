@@ -4,6 +4,8 @@ import Score from "./Score";
 
 const Canvas = function(props) {
   const {scoreP1, scoreP2, increaseScoreP1, increaseScoreP2} = props;
+  console.log(scoreP1)
+  console.log(scoreP2)
   // const fps = 30;
   const canvasRef = useRef(null);
   const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
@@ -58,12 +60,16 @@ const Canvas = function(props) {
 
     if (ball.x - ball.r  < 0) {
       ballReset(ball, context, paddleRight, paddleLeft);
-      increaseScoreP2();
+      if (scoreP2 < 5) {
+        increaseScoreP2();
+      }
     }
 
     if (ball.x + ball.r > context.canvas.width) {
       ballReset(ball, context, paddleRight, paddleLeft);
-      increaseScoreP1();
+      if (scoreP1 < 5) {
+        increaseScoreP1();
+      }
     }
 
     if (ball.y - ball.r  <= 0) {

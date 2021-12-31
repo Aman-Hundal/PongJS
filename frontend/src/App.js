@@ -18,7 +18,6 @@ const increaseScoreP1 = () => {
 
 const increaseScoreP2 = () => {
   console.log("P2 score increased")
-
   setState(({...state, scoreP2: state.scoreP2 += 1}))
 }
 

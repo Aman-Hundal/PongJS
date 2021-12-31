@@ -11,6 +11,7 @@ const Canvas = function(props) {
   const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
   const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 0 }); //computer speed 15-20
   const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, vy: 40 });
+  const scoreRef = useRef({scoreP1: 0, scoreP2: 0});
 
   const createBoard = (context, ball, rightPaddle, leftPaddle) => {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -54,22 +55,21 @@ const Canvas = function(props) {
     }
   }
 
-  const updateBall = function(context, ball, paddleLeft, paddleRight) {
+  const updateBall = function(context, ball, paddleLeft, paddleRight, scoreRef) {
     ball.x += ball.vx;
     ball.y += ball.vy;
+    
 
-    if (ball.x - ball.r  < 0) {
+    if (ball.x - ball.r  < 0 && scoreRef.scoreP2 < 5) {
       ballReset(ball, context, paddleRight, paddleLeft);
-      if (scoreP2 < 5) {
-        increaseScoreP2();
-      }
+      scoreRef.scoreP2 += 1;
+      increaseScoreP2();
     }
 
-    if (ball.x + ball.r > context.canvas.width) {
+    if (ball.x + ball.r > context.canvas.width && scoreRef.scoreP1 < 5) {
       ballReset(ball, context, paddleRight, paddleLeft);
-      if (scoreP1 < 5) {
-        increaseScoreP1();
-      }
+      scoreRef.scoreP1 += 1;
+      increaseScoreP1();
     }
 
     if (ball.y - ball.r  <= 0) {
@@ -190,14 +190,13 @@ const Canvas = function(props) {
   const render = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
-    updateBall(context, ballRef.current, paddleLRef.current, paddleRRef.current);
+    updateBall(context, ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current);
     updatePaddleR(context, paddleRRef.current);
     createBoard(context, ballRef.current, paddleRRef.current, paddleLRef.current);
     requestAnimationFrame(render);
   }
 
   useEffect(()=> { //need a useEffect to control/trigger side effects for our components. We want to call/use this code after our Canvas component is rendered -> useEffect allows for this
-
     render();
 
   }, []) //empty array says we only want to trigger this function once

@@ -4,7 +4,7 @@ import Score from "./Score";
 import Timer from "./Timer";
 
 const Canvas = function(props) {
-  const {scoreP1, scoreP2, increaseScoreP1, increaseScoreP2} = props;
+  const {scoreP1, scoreP2, increaseScoreP1, increaseScoreP2, mins, secs} = props;
   console.log(scoreP1)
   console.log(scoreP2)
   // const fps = 30;
@@ -204,7 +204,7 @@ const Canvas = function(props) {
 
   return(
     <div>
-    <Timer />
+    <Timer mins={mins} secs={secs} />
     <Score scoreP1={scoreP1} scoreP2={scoreP2} />
     <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
     </canvas>

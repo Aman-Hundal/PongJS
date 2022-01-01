@@ -8,7 +8,9 @@ function App() {
 const [state, setState] = useState({
   users: [],
   scoreP1: 0,
-  scoreP2: 0
+  scoreP2: 0,
+  minutes: 3,
+  seconds: 60
 });
 
 const increaseScoreP1 = () => {
@@ -21,13 +23,17 @@ const increaseScoreP2 = () => {
   setState(({...state, scoreP2: state.scoreP2 += 1}));
 }
 
+const animateTimer = () => {
+  
+}
+
 //testdata
 const testData = [{name: "Amo", score: 50}, {name:"Elliot", score: 100}]
 
   return (
     <div className="App">
       <h1>Pong!</h1>
-      <Canvas scoreP1={state.scoreP1} scoreP2={state.scoreP2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} />
+      <Canvas scoreP1={state.scoreP1} scoreP2={state.scoreP2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} />
       <Leaderboard users={testData} />
     </div>
   );

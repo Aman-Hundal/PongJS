@@ -4,7 +4,7 @@ import Score from "./Score";
 import Timer from "./Timer";
 
 const Canvas = function(props) {
-  const {scoreP1, scoreP2, increaseScoreP1, increaseScoreP2, mins, secs} = props;
+  const {scoreP1, scoreP2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer} = props;
   console.log(scoreP1)
   console.log(scoreP2)
   // const fps = 30;
@@ -197,14 +197,14 @@ const Canvas = function(props) {
     requestAnimationFrame(render);
   }
 
-  useEffect(()=> { //need a useEffect to control/trigger side effects for our components. We want to call/use this code after our Canvas component is rendered -> useEffect allows for this
+  useEffect(() => { //need a useEffect to control/trigger side effects for our components. We want to call/use this code after our Canvas component is rendered -> useEffect allows for this
     render();
 
   }, []) //empty array says we only want to trigger this function once
 
   return(
     <div>
-    <Timer mins={mins} secs={secs} />
+    <Timer mins={mins} secs={secs} animateTimer={animateTimer} />
     <Score scoreP1={scoreP1} scoreP2={scoreP2} />
     <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
     </canvas>

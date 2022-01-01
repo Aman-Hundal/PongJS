@@ -1,13 +1,15 @@
-const Timer = (props) => {
-  const {mins, secs} = props;
-  let humanSeconds = 0;
+import {useEffect} from 'react';
 
-  if (secs === 60) {
-    humanSeconds = "00";
-  }
+const Timer = (props) => {
+  const {mins, secs, animateTimer} = props;
+  
+  useEffect(() => { //need a useEffect to control/trigger side effects for our components. We want to call/use this code after our Canvas component is rendered -> useEffect allows for this
+    animateTimer();
+
+  }, [])
   
   return (
-    <h1>{mins}:{humanSeconds}</h1>
+    <h1>{mins}:{secs}</h1>
   )
 };
 

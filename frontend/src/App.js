@@ -12,13 +12,13 @@ const [state, setState] = useState({
 });
 
 const increaseScoreP1 = () => {
-  console.log("P1 score increased")
-  setState(({...state, scoreP1: state.scoreP1 += 1}))
+  console.log("P1 score increased");
+  setState(({...state, scoreP1: state.scoreP1 += 1}));
 }
 
 const increaseScoreP2 = () => {
-  console.log("P2 score increased")
-  setState(({...state, scoreP2: state.scoreP2 += 1}))
+  console.log("P2 score increased");
+  setState(({...state, scoreP2: state.scoreP2 += 1}));
 }
 
 //testdata

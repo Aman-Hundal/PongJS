@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react'; //useRef allows us to get a dom element in React. Refs provide a way to access DOM nodes or React elements created in the render method
 import './styles/Canvas.css';
 import Score from "./Score";
+import Timer from "./Timer";
 
 const Canvas = function(props) {
   const {scoreP1, scoreP2, increaseScoreP1, increaseScoreP2} = props;
@@ -203,6 +204,7 @@ const Canvas = function(props) {
 
   return(
     <div>
+    <Timer />
     <Score scoreP1={scoreP1} scoreP2={scoreP2} />
     <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
     </canvas>

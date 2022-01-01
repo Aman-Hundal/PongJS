@@ -1,6 +1,6 @@
 const Timer = (props) => {
   return (
-    <h1>Timer in minutes:seconds</h1>
+    <h1>3:00</h1>
   )
 };
 

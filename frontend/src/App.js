@@ -10,7 +10,7 @@ const [state, setState] = useState({
   scoreP1: 0,
   scoreP2: 0,
   minutes: 3,
-  seconds: 60
+  seconds: 0
 });
 
 const increaseScoreP1 = () => {
@@ -25,7 +25,16 @@ const increaseScoreP2 = () => {
 
 const animateTimer = () => {
   setInterval( () => {
-    setState({...state, seconds: state.seconds -= 1})
+    if (state.seconds === 0) {
+      setState({...state, seconds: state.seconds = 60});
+      setState({...state, minutes: state.minutes -= 1});
+    }
+
+    if (state.seconds <= 0 && state.minutes <= 0) {
+      clearInterval(animateTimer)
+    }
+
+    setState({...state, seconds: state.seconds -= 1});
   }, 1000)
 }
 

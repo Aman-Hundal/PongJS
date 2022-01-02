@@ -9,7 +9,7 @@ const Timer = (props) => {
   }, [])
   
   return (
-    <h1>{mins}:{secs}</h1>
+    <h1>{mins}:{secs < 10 ? "0" : ""}{secs}</h1>
   )
 };
 

@@ -60,15 +60,15 @@ const testData = [
 export default App;
 
 // to do:
-//singe player functionalty
+//singe player functionalty:
 // play and play again button at game end
 // message stating which player won
 // game reset logic after game end and play again cliked
 // draw, win, lose functionality
 
-// refactor
+// refactor functions and state and repettive code
 
-//multiplayer functionality
+//multiplayer functionality:
 // websockets at multiplayer functionality
 // user login
-// leaderboard = recent game scores of last 5 games MONGO DB
+// leaderboard = recent game scores of last 5 games MONGO DB + backend work

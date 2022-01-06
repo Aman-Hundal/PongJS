@@ -5,14 +5,15 @@ import Timer from "./Timer";
 
 const Canvas = function(props) {
   const {scoreP1, scoreP2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer} = props;
-  console.log(scoreP1)
-  console.log(scoreP2)
+  // console.log(scoreP1)
+  // console.log(scoreP2)
   // const fps = 30;
   const canvasRef = useRef(null);
   const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
   const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 0 }); //computer speed 15-20
   const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, vy: 40 });
   const scoreRef = useRef({scoreP1: 0, scoreP2: 0});
+  const timerRef = useRef({mins: mins, secs: secs});
 
   const createBoard = (context, ball, rightPaddle, leftPaddle) => {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -56,6 +57,14 @@ const Canvas = function(props) {
     }
   }
 
+  const endGame = (scoreRef, timerRef) => {
+
+    if (scoreRef.scoreP1 === 5 || scoreRef.scoreP2 === 5) {
+      return true;
+    }
+    
+  }
+
   const updateBall = function(context, ball, paddleLeft, paddleRight, scoreRef) {
     ball.x += ball.vx;
     ball.y += ball.vy;
@@ -84,7 +93,7 @@ const Canvas = function(props) {
     //paddle collision
     if (ballPaddleCollision(ball, paddleLeft)) {
       ball.speed += 1;
-      console.log(ball.speed)
+      // console.log(ball.speed)
       let collidePoint = (ball.y - (paddleLeft.y + paddleLeft.h/2));
       collidePoint = collidePoint / (paddleLeft.h/2); //normalizing collide point between -1 and 1
       let angle = collidePoint * (Math.PI / 4);
@@ -92,18 +101,18 @@ const Canvas = function(props) {
       if (ball.vx > 0) {
         ball.vx = -ball.speed * Math.cos(angle);
         ball.vy = ball.speed * Math.sin(angle);
-        console.log(ball)
+        // console.log(ball)
       }
 
       ball.vx = ball.speed * Math.cos(angle);
       ball.vy = ball.speed * Math.sin(angle);
-      console.log(ball)
+      // console.log(ball)
 
     }
     
     if (ballPaddleCollision(ball, paddleRight)) {
       ball.speed += 1
-      console.log(ball.speed)
+      // console.log(ball.speed)
       let collidePoint = (ball.y - (paddleRight.y + paddleRight.h/2));
       collidePoint = collidePoint / (paddleRight.h/2); //normalizing collide point between -1 and 1
       let angle = collidePoint * (Math.PI / 4);
@@ -111,12 +120,12 @@ const Canvas = function(props) {
       if (ball.vx < 0) {
         ball.vx = ball.speed * Math.cos(angle);
         ball.vy = ball.speed * Math.sin(angle);
-        console.log(ball)
+        // console.log(ball)
       }
 
       ball.vx = -ball.speed * Math.cos(angle);
       ball.vy = ball.speed * Math.sin(angle);
-      console.log(ball)
+      // console.log(ball)
     }
   };
 
@@ -143,10 +152,6 @@ const Canvas = function(props) {
     paddleRight.y = 320;
     paddleRight.vy = 0;
     paddleLeft.y = 320;
-
-    console.log(ball)
-    console.log(paddleLeft)
-    console.log(paddleRight)
   }
 
   const startGame = (ball, paddle) => {
@@ -189,6 +194,11 @@ const Canvas = function(props) {
   }
 
   const render = () => {
+    
+    if (endGame(scoreRef.current, timerRef.current)) {
+      return ;
+    }
+
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
     updateBall(context, ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current);
@@ -198,6 +208,7 @@ const Canvas = function(props) {
   }
 
   useEffect(() => { //need a useEffect to control/trigger side effects for our components. We want to call/use this code after our Canvas component is rendered -> useEffect allows for this
+
     render();
 
   }, []) //empty array says we only want to trigger this function once

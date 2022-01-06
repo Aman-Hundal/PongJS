@@ -1,7 +1,7 @@
 const Button = (props) => {
     const { message } = props;
     return (
-        <button>Play or Play Again?</button>
+        <button>{message}</button>
     )
 };
 

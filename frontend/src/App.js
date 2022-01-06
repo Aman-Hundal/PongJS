@@ -1,6 +1,7 @@
 import './App.css';
 import Canvas from "./components/Canvas"
 import Leaderboard from './components/Leaderboard';
+import Button from './components/Button';
 import {useState, useEffect} from 'react';
 
 
@@ -9,8 +10,8 @@ const [state, setState] = useState({
   users: [],
   scoreP1: 0,
   scoreP2: 0,
-  minutes: 1,
-  seconds: 0
+  minutes: 0,
+  seconds: 20
 });
 
 const increaseScoreP1 = () => {
@@ -52,6 +53,7 @@ const testData = [
     <div className="App">
       <h1>Pong!</h1>
       <Canvas scoreP1={state.scoreP1} scoreP2={state.scoreP2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
+      <Button message={state.scoreP1 === 5 || state.scoreP2 === 5 || state.minutes === 0 && state.seconds === 0 ? "Play Again?" :  "Play"} /> 
       <Leaderboard matches={testData} />
     </div>
   );

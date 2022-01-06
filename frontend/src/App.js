@@ -23,15 +23,18 @@ const increaseScoreP2 = () => {
   setState({...state, scoreP2: state.scoreP2 += 1});
 }
 
-const animateTimer = () => {
+const animateTimer = (timerRef) => {
   let timerId = setInterval( () => {
-    if (state.seconds === 0 && state.minutes === 0) {
+    if (state.seconds === 0 && state.minutes === 0 || state.scoreP1 === 5 || state.scoreP2 === 5) {
       clearInterval(timerId);
     } else if (state.seconds === 0) {
       setState({...state, seconds: state.seconds = 59});
       setState({...state, minutes: state.minutes -= 1});
+      timerRef.secs = 59;
+      timerRef.mins -= 1;
     } else {
       setState({...state, seconds: state.seconds -= 1});
+      timerRef.secs -= 1;
     }
   }, 1000)
 }

@@ -62,6 +62,10 @@ const Canvas = function(props) {
     if (scoreRef.scoreP1 === 5 || scoreRef.scoreP2 === 5) {
       return true;
     }
+
+    if (timerRef.secs === 0 && timerRef.mins === 0) {
+      return true;
+    }
     
   }
 
@@ -208,7 +212,8 @@ const Canvas = function(props) {
   }
 
   useEffect(() => { //need a useEffect to control/trigger side effects for our components. We want to call/use this code after our Canvas component is rendered -> useEffect allows for this
-
+    
+    animateTimer(timerRef.current);
     render();
 
   }, []) //empty array says we only want to trigger this function once

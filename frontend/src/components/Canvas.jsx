@@ -200,7 +200,7 @@ const Canvas = function(props) {
   const render = () => {
     
     if (endGame(scoreRef.current, timerRef.current)) {
-      return ;
+      return;
     }
 
     const canvas = canvasRef.current;

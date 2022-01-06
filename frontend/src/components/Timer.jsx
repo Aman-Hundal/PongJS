@@ -1,5 +1,3 @@
-import {useEffect} from 'react';
-
 const Timer = (props) => {
   const {mins, secs, animateTimer} = props;
   

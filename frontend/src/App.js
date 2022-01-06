@@ -40,15 +40,35 @@ const animateTimer = (timerRef) => {
 }
 
 //testdata
-const testData = [{name: "Amo", score: 50}, {name:"Elliot", score: 100}];
+const testData = [
+  {id: 1, p1: "Amo", p2: "Elliot", score:[5,3], winner: "Amo"},
+  {id: 2, p1: "Paul", p2: "Peter", score:[0,5], winner: "Peter"},
+  {id: 3, p1: "Aragorn", p2: "Gandalf", score:[5,4], winner: "Aragorn"},
+  {id: 4, p1: "Tobey", p2: "Andrew", score:[3,5], winner: "Andrew"},
+  {id: 5, p1: "Amo", p2: "Viggo", score:[5,5], winner: ""}
+]
 
   return (
     <div className="App">
       <h1>Pong!</h1>
       <Canvas scoreP1={state.scoreP1} scoreP2={state.scoreP2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
-      <Leaderboard users={testData} />
+      <Leaderboard matches={testData} />
     </div>
   );
 }
 
 export default App;
+
+// to do:
+//singe player functionalty
+// play and play again button at game end
+// message stating which player won
+// game reset logic after game end and play again cliked
+// draw, win, lose functionality
+
+// refactor
+
+//multiplayer functionality
+// websockets at multiplayer functionality
+// user login
+// leaderboard = recent game scores of last 5 games MONGO DB

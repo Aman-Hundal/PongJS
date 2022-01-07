@@ -39,9 +39,12 @@ const animateTimer = (timerRef) => {
   }, 1000)
 }
 
-const newGame = (ball, paddleLeft, paddleRight, gameOnRef) => {
-  gameOnRef = true;
+const newGame = (ball, paddleLeft, paddleRight, score, timer) => {
   setState({...state, scoreP1: 0, scoreP2:0, minutes: 0, seconds: 10});
+  score.scoreP1 = 0; 
+  timer.mins = 0;
+  timer.secs = 10;
+  score.scoreP2 = 0;
   ball.x = 700;
   ball.y = 400;
   ball.vx = 0;

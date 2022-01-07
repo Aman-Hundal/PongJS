@@ -18,7 +18,6 @@ const Canvas = function(props) {
   let gameOnRef = useRef(true);
 
   console.log("ref", gameOnRef.current)
-  console.log("state:", gameOn)
 
   const createBoard = (context, ball, rightPaddle, leftPaddle) => {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -210,7 +209,6 @@ const Canvas = function(props) {
     createBoard(context, ballRef.current, paddleRRef.current, paddleLRef.current);
     
     if (gameOver(scoreRef.current, timerRef.current)) {
-      turnGameOff();
       gameOnRef.current = false;
     }
 
@@ -233,7 +231,11 @@ const Canvas = function(props) {
     <Score scoreP1={scoreP1} scoreP2={scoreP2} />
     <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
     </canvas>
-      <div onClick={event => newGame(ballRef.current, paddleLRef.current, paddleRRef.current, gameOnRef.current)}>
+      <div onClick={(event) => {
+        newGame(ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current, timerRef.current);
+        gameOnRef.current = true;
+        console.log(scoreRef.current, timerRef.current)
+      }}>
         <Button message={scoreP1 === 5 || scoreP2 === 5 || (mins === 0 && secs === 0) ? "Play Again?" : "Press Enter to Start"} /> 
       </div>
     </div>

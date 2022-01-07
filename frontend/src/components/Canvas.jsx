@@ -2,9 +2,10 @@ import { useRef, useEffect } from 'react'; //useRef allows us to get a dom eleme
 import './styles/Canvas.css';
 import Score from "./Score";
 import Timer from "./Timer";
+import Button from './Button';
 
 const Canvas = function(props) {
-  const {scoreP1, scoreP2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer} = props;
+  const {scoreP1, scoreP2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame} = props;
   // console.log(scoreP1)
   // console.log(scoreP2)
   // const fps = 30;
@@ -12,8 +13,12 @@ const Canvas = function(props) {
   const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
   const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 0 }); //computer speed 15-20
   const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, vy: 40 });
-  const scoreRef = useRef({scoreP1: 0, scoreP2: 0});
+  const scoreRef = useRef({scoreP1: scoreP1, scoreP2: scoreP2});
   const timerRef = useRef({mins: mins, secs: secs});
+  let gameOnRef = useRef(true);
+
+  console.log("ref", gameOnRef.current)
+  console.log("state:", gameOn)
 
   const createBoard = (context, ball, rightPaddle, leftPaddle) => {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -57,8 +62,7 @@ const Canvas = function(props) {
     }
   }
 
-  const endGame = (scoreRef, timerRef) => {
-
+  const gameOver = (scoreRef, timerRef) => {
     if (scoreRef.scoreP1 === 5 || scoreRef.scoreP2 === 5) {
       return true;
     }
@@ -66,7 +70,6 @@ const Canvas = function(props) {
     if (timerRef.secs === 0 && timerRef.mins === 0) {
       return true;
     }
-    
   }
 
   const updateBall = function(context, ball, paddleLeft, paddleRight, scoreRef) {
@@ -148,14 +151,15 @@ const Canvas = function(props) {
   };
 
   const ballReset = (ball, context, paddleRight, paddleLeft) => {
+    const direction = [1, -1];
     ball.x = context.canvas.width/2;
     ball.y = context.canvas.height/2;
-    ball.vx = 0;
+    ball.vx = 5 * direction[Math.floor(Math.random() * direction.length)];
     ball.vy = 0;
     ball.speed = 5;
     paddleRight.y = 320;
-    paddleRight.vy = 0;
     paddleLeft.y = 320;
+    paddleRight.vy = 20;
   }
 
   const startGame = (ball, paddle) => {
@@ -199,16 +203,21 @@ const Canvas = function(props) {
 
   const render = () => {
     
-    if (endGame(scoreRef.current, timerRef.current)) {
-      return;
-    }
-
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
     updateBall(context, ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current);
     updatePaddleR(context, paddleRRef.current);
     createBoard(context, ballRef.current, paddleRRef.current, paddleLRef.current);
-    requestAnimationFrame(render);
+    
+    if (gameOver(scoreRef.current, timerRef.current)) {
+      turnGameOff();
+      gameOnRef.current = false;
+    }
+
+    if (gameOnRef.current) {
+      requestAnimationFrame(render);
+    }
+    
   }
 
   useEffect(() => { //need a useEffect to control/trigger side effects for our components. We want to call/use this code after our Canvas component is rendered -> useEffect allows for this
@@ -224,6 +233,9 @@ const Canvas = function(props) {
     <Score scoreP1={scoreP1} scoreP2={scoreP2} />
     <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
     </canvas>
+      <div onClick={event => newGame(ballRef.current, paddleLRef.current, paddleRRef.current, gameOnRef.current)}>
+        <Button message={scoreP1 === 5 || scoreP2 === 5 || (mins === 0 && secs === 0) ? "Play Again?" : "Press Enter to Start"} /> 
+      </div>
     </div>
   )
 };

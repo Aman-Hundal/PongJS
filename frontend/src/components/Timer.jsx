@@ -1,5 +1,5 @@
 const Timer = (props) => {
-  const {mins, secs, animateTimer} = props;
+  const { mins, secs } = props;
   
   return (
     <h1>{mins}:{secs < 10 ? "0" : ""}{secs}</h1>

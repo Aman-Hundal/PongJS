@@ -82,7 +82,6 @@ export default App;
 
 // to do:
 //singe player functionalty:
-// game reset logic after game end and play again cliked
 // draw, win, lose functionality
 // message stating which player won
 

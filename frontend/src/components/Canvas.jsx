@@ -15,9 +15,9 @@ const Canvas = function(props) {
   const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, vy: 40 });
   const scoreRef = useRef({scoreP1: scoreP1, scoreP2: scoreP2});
   const timerRef = useRef({mins: mins, secs: secs});
-  let gameOnRef = useRef(true);
+  // let gameOnRef = useRef(gameOn);
 
-  console.log("ref", gameOnRef.current)
+  // console.log("ref", gameOnRef.current)
   console.log("state", gameOn)
 
   const createBoard = (context, ball, rightPaddle, leftPaddle) => {
@@ -206,16 +206,16 @@ const Canvas = function(props) {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
     updateBall(context, ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current);
-    // updatePaddleR(context, paddleRRef.current);
+    updatePaddleR(context, paddleRRef.current);
     createBoard(context, ballRef.current, paddleRRef.current, paddleLRef.current);
     
     if (gameOver(scoreRef.current, timerRef.current)) {
-      gameOnRef.current = false;
+      // gameOnRef.current = false;
       endGame();
-      console.log("should be false", gameOnRef.current, gameOn)
+      console.log("should be false", gameOn)
     }
 
-    if (gameOnRef.current) {
+    if (gameOn) {
       requestAnimationFrame(render);
     }
     
@@ -236,7 +236,7 @@ const Canvas = function(props) {
     <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
     </canvas>
       <div onClick={(event) => {
-        gameOnRef.current = true;
+        // gameOnRef.current = true;
         newGame(ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current, timerRef.current);
         console.log(scoreRef.current, timerRef.current)
       }}>

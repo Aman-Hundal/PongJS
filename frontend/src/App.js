@@ -11,6 +11,7 @@ const [state, setState] = useState({
   scoreP2: 0,
   minutes: 0,
   seconds: 10,
+  gameOn: true
 });
 
 const increaseScoreP1 = () => {
@@ -40,7 +41,7 @@ const animateTimer = (timerRef) => {
 }
 
 const newGame = (ball, paddleLeft, paddleRight, score, timer) => {
-  setState({...state, scoreP1: 0, scoreP2:0, minutes: 0, seconds: 10});
+  setState({...state, scoreP1: 0, scoreP2:0, minutes: 0, seconds: 10, gameOn: true});
   score.scoreP1 = 0; 
   timer.mins = 0;
   timer.secs = 10;
@@ -55,10 +56,9 @@ const newGame = (ball, paddleLeft, paddleRight, score, timer) => {
   paddleLeft.y = 320;
 }
 
-// const endGame = () => {
-//   console.log("Game Ended, Please play again");
-//   setState({...state, scoreP2: state.scoreP2 += 1});
-// }
+const endGame = () => {
+  setState({...state, gameOn: false});
+}
 
 //testdata
 const testData = [
@@ -72,7 +72,7 @@ const testData = [
   return (
     <div className="App">
       <h1>Pong!</h1>
-      <Canvas newGame={newGame} scoreP1={state.scoreP1} scoreP2={state.scoreP2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
+      <Canvas newGame={newGame} endGame={endGame} gameOn={state.gameOn} scoreP1={state.scoreP1} scoreP2={state.scoreP2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
       <Leaderboard matches={testData} />
     </div>
   );

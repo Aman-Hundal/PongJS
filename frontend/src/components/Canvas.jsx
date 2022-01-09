@@ -223,7 +223,6 @@ const Canvas = function(props) {
 
   useEffect(() => { //need a useEffect to control/trigger side effects for our components. We want to call/use this code after our Canvas component is rendered -> useEffect allows for this
     
-
     animateTimer(timerRef.current);
     render();
 

@@ -6,11 +6,12 @@ import {useState, useEffect} from 'react';
 
 function App() {
 const [state, setState] = useState({
-  users: [],
+  matches: [{}],
+  players: {},
   scoreP1: 0,
   scoreP2: 0,
   minutes: 0,
-  seconds: 10,
+  seconds: 15,
   gameOn: true
 });
 
@@ -41,7 +42,7 @@ const animateTimer = (timerRef) => {
 }
 
 const newGame = (ball, paddleLeft, paddleRight, score, timer) => {
-  setState({...state, scoreP1: 0, scoreP2:0, minutes: 0, seconds: 10, gameOn: true});
+  setState({...state, scoreP1: 0, scoreP2:0, minutes: 0, seconds: 15, gameOn: true});
   score.scoreP1 = 0; 
   timer.mins = 0;
   timer.secs = 10;
@@ -84,11 +85,12 @@ export default App;
 //singe player functionalty:
 // draw, win, lose functionality
 // message stating which player won
+// user login
+
 
 
 // refactor functions and state and repettive code
 
 //multiplayer functionality:
 // websockets at multiplayer functionality
-// user login
 // leaderboard = recent game scores of last 5 games MONGO DB + backend work

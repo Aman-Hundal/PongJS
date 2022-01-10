@@ -7,9 +7,8 @@ import {useState, useEffect} from 'react';
 function App() {
 const [state, setState] = useState({
   matches: [{}],
-  players: {},
-  scoreP1: 0,
-  scoreP2: 0,
+  player1: {name: "", score: 0},
+  player2: {name: "", score: 0},
   minutes: 0,
   seconds: 15,
   gameOn: true
@@ -17,17 +16,19 @@ const [state, setState] = useState({
 
 const increaseScoreP1 = () => {
   console.log("P1 score increased");
-  setState({...state, scoreP1: state.scoreP1 += 1});
+  const player1 = {...state.player1, score: state.player1.score += 1};
+  setState({...state, player1});
 }
 
 const increaseScoreP2 = () => {
   console.log("P2 score increased");
-  setState({...state, scoreP2: state.scoreP2 += 1});
+  const player2 = {...state.player2, score: state.player2.score += 1};
+  setState({...state, player2});
 }
 
 const animateTimer = (timerRef) => {
   let timerId = setInterval( () => {
-    if ((state.seconds === 0 && state.minutes === 0) || state.scoreP1 === 5 || state.scoreP2 === 5) {
+    if ((state.seconds === 0 && state.minutes === 0) || state.player1.score === 5 || state.player2.score === 5) {
       clearInterval(timerId);
     } else if (state.seconds === 0) {
       setState({...state, seconds: state.seconds = 59});
@@ -41,12 +42,14 @@ const animateTimer = (timerRef) => {
   }, 1000)
 }
 
-const newGame = (ball, paddleLeft, paddleRight, score, timer) => {
-  setState({...state, scoreP1: 0, scoreP2:0, minutes: 0, seconds: 15, gameOn: true});
-  score.scoreP1 = 0; 
-  timer.mins = 0;
-  timer.secs = 10;
-  score.scoreP2 = 0;
+const newGame = (ball, paddleLeft, paddleRight, scoreRef, timerRef) => {
+  const player1 =  {...state.player1, score: state.player1.score = 0};
+  const player2 = {...state.player2, score: state.player2.score = 0};
+  setState({...state, player1, player2, minutes: 0, seconds: 15, gameOn: true});
+  scoreRef.scoreP1 = 0; 
+  timerRef.mins = 0;
+  timerRef.secs = 15;
+  scoreRef.scoreP2 = 0;
   ball.x = 700;
   ball.y = 400;
   ball.vx = 0;
@@ -73,7 +76,7 @@ const testData = [
   return (
     <div className="App">
       <h1>Pong!</h1>
-      <Canvas newGame={newGame} endGame={endGame} gameOn={state.gameOn} scoreP1={state.scoreP1} scoreP2={state.scoreP2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
+      <Canvas newGame={newGame} endGame={endGame} gameOn={state.gameOn} P1={state.player1} P2={state.player2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
       <Leaderboard matches={testData} />
     </div>
   );

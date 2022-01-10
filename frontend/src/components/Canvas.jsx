@@ -1,19 +1,21 @@
-import { useRef, useEffect } from 'react'; //useRef allows us to get a dom element in React. Refs provide a way to access DOM nodes or React elements created in the render method
+import { useRef, useEffect } from 'react'; 
+//useRef allows us to get a dom element in React. Refs provide a way to access DOM nodes or React elements created in the render method
+//refs are great for accesing/reference dom elements (likes HTML CANVAS) and for persisting/updating values across renders without causing a re render. But generally USE STATE TO MANAGE VALUEs/DATA
 import './styles/Canvas.css';
 import Score from "./Score";
 import Timer from "./Timer";
 import Button from './Button';
 
 const Canvas = function(props) {
-  const {scoreP1, scoreP2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame, gameOn, endGame} = props;
+  const {P1, P2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame, gameOn, endGame} = props;
   // console.log(scoreP1)
   // console.log(scoreP2)
   // const fps = 30;
   const canvasRef = useRef(null);
   const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
-  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 0 }); //computer speed 15-20
-  const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, vy: 40 });
-  const scoreRef = useRef({scoreP1: scoreP1, scoreP2: scoreP2});
+  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 0}); //computer speed 15-20
+  const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, vy: 40});
+  const scoreRef = useRef({scoreP1: P1.score, scoreP2: P2.score});
   const timerRef = useRef({mins: mins, secs: secs});
   let gameOnRef = useRef(gameOn);
 
@@ -231,7 +233,7 @@ const Canvas = function(props) {
   return(
     <div>
     <Timer mins={mins} secs={secs} animateTimer={animateTimer} />
-    <Score scoreP1={scoreP1} scoreP2={scoreP2} />
+    <Score scoreP1={P1.score} scoreP2={P2.score} />
     <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
     </canvas>
       <div onClick={(event) => {
@@ -239,7 +241,7 @@ const Canvas = function(props) {
         newGame(ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current, timerRef.current);
         console.log(scoreRef.current, timerRef.current)
       }}>
-        <Button message={scoreP1 === 5 || scoreP2 === 5 || (mins === 0 && secs === 0) ? "Play Again?" : "Press Enter to Start"} /> 
+        <Button message={P1.score === 5 || P2.score === 5 || (mins === 0 && secs === 0) ? "Play Again?" : ""} /> 
       </div>
     </div>
   )

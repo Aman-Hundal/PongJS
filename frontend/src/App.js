@@ -1,14 +1,15 @@
 import './App.css';
 import Canvas from "./components/Canvas"
 import Leaderboard from './components/Leaderboard';
+import Players from './components/Players';
 import {useState, useEffect} from 'react';
 
 
 function App() {
 const [state, setState] = useState({
   matches: [{}],
-  player1: {name: "", score: 0},
-  player2: {name: "", score: 0},
+  player1: {name: "Amo", score: 0},
+  player2: {name: "Goodfella", score: 0},
   minutes: 0,
   seconds: 15,
   gameOn: true
@@ -64,6 +65,16 @@ const endGame = () => {
   setState({...state, gameOn: false});
 }
 
+const winner = function(player1, player2) {
+  if (player1.score > player2.score) {
+    return `${player1.name} is the winner!`;
+  } else if (player2.score > player1.score) {
+    return `${player2.name} is the winner!`;
+  } else {
+    return "Its a draw! Play again?";
+  }
+}
+
 //testdata
 const testData = [
   {id: 1, p1: "Amo", p2: "Elliot", score:[5,3], winner: "Amo"},
@@ -75,7 +86,7 @@ const testData = [
 
   return (
     <div className="App">
-      <h1>Pong!</h1>
+      <Players P1={state.player1} P2={state.player2} /> 
       <Canvas newGame={newGame} endGame={endGame} gameOn={state.gameOn} P1={state.player1} P2={state.player2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
       <Leaderboard matches={testData} />
     </div>
@@ -89,10 +100,7 @@ export default App;
 // draw, win, lose functionality
 // message stating which player won
 // user login
-
-
-
-// refactor functions and state and repettive code
+// refactor functions and state and repettive code and userefs/usestates
 
 //multiplayer functionality:
 // websockets at multiplayer functionality

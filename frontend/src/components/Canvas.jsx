@@ -5,9 +5,9 @@ import './styles/Canvas.css';
 import Score from "./Score";
 import Timer from "./Timer";
 import PlayAgain from './PlayAgain';
-
+import Result from './Result';
 const Canvas = function(props) {
-  const {P1, P2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame, gameOn, endGame} = props;
+  const {P1, P2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame, gameOn, endGame, winner} = props;
   // console.log(scoreP1)
   // console.log(scoreP2)
   // const fps = 30;
@@ -240,6 +240,7 @@ const Canvas = function(props) {
         newGame(ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current, timerRef.current);
         console.log(scoreRef.current, timerRef.current)
       }}>
+        <Result winner={winner} P1={P1} P2={P2} mins={mins} secs={secs} />
         <PlayAgain trigger={P1.score === 5 || P2.score === 5 || (mins === 0 && secs === 0) ? true : null} /> 
       </div>
     </div>

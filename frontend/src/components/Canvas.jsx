@@ -4,7 +4,7 @@ import { useRef, useEffect } from 'react';
 import './styles/Canvas.css';
 import Score from "./Score";
 import Timer from "./Timer";
-import Button from './Button';
+import PlayAgain from './PlayAgain';
 
 const Canvas = function(props) {
   const {P1, P2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame, gameOn, endGame} = props;
@@ -204,7 +204,6 @@ const Canvas = function(props) {
   }
 
   const render = () => {
-    
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
     updateBall(context, ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current);
@@ -241,7 +240,7 @@ const Canvas = function(props) {
         newGame(ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current, timerRef.current);
         console.log(scoreRef.current, timerRef.current)
       }}>
-        <Button message={P1.score === 5 || P2.score === 5 || (mins === 0 && secs === 0) ? "Play Again?" : ""} /> 
+        <PlayAgain trigger={P1.score === 5 || P2.score === 5 || (mins === 0 && secs === 0) ? true : null} /> 
       </div>
     </div>
   )

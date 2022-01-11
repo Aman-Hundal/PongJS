@@ -2,6 +2,7 @@ import './App.css';
 import Canvas from "./components/Canvas"
 import Leaderboard from './components/Leaderboard';
 import Players from './components/Players';
+import Result from './components/Result';
 import {useState, useEffect} from 'react';
 
 
@@ -11,7 +12,7 @@ const [state, setState] = useState({
   player1: {name: "Amo", score: 0},
   player2: {name: "Goodfella", score: 0},
   minutes: 0,
-  seconds: 15,
+  seconds: 30,
   gameOn: true
 });
 
@@ -46,10 +47,10 @@ const animateTimer = (timerRef) => {
 const newGame = (ball, paddleLeft, paddleRight, scoreRef, timerRef) => {
   const player1 =  {...state.player1, score: state.player1.score = 0};
   const player2 = {...state.player2, score: state.player2.score = 0};
-  setState({...state, player1, player2, minutes: 0, seconds: 15, gameOn: true});
+  setState({...state, player1, player2, minutes: 0, seconds: 30, gameOn: true});
   scoreRef.scoreP1 = 0; 
   timerRef.mins = 0;
-  timerRef.secs = 15;
+  timerRef.secs = 30;
   scoreRef.scoreP2 = 0;
   ball.x = 700;
   ball.y = 400;
@@ -65,14 +66,26 @@ const endGame = () => {
   setState({...state, gameOn: false});
 }
 
-const winner = function(player1, player2) {
-  if (player1.score > player2.score) {
+const winner = function(player1, player2, minutes, seconds) {
+  if (player1.score === 5) {
     return `${player1.name} is the winner!`;
-  } else if (player2.score > player1.score) {
+  } else if (player2.score === 5) {
     return `${player2.name} is the winner!`;
-  } else {
-    return "Its a draw! Play again?";
+  } else if (player2.score  === 5 && player1.score === 5) {
+    return "Draw!";
   }
+
+  if (minutes === 0 && seconds === 0) {
+    if (player1.score > player2.score) {
+      return `${player1.name} is the winner!`;
+    } else if (player2.score > player1.score) {
+      return `${player2.name} is the winner!`;
+    } else if (player1.score === player2.score) {
+      return "Draw!";
+    }
+  }
+
+  return null;
 }
 
 //testdata
@@ -88,16 +101,16 @@ const testData = [
     <div className="App">
       <Players P1={state.player1} P2={state.player2} /> 
       <Canvas newGame={newGame} endGame={endGame} gameOn={state.gameOn} P1={state.player1} P2={state.player2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
+      <Result winner={winner} P1={state.player1} P2={state.player2} mins={state.minutes} secs={state.seconds} /> 
       <Leaderboard matches={testData} />
     </div>
-  );
+  )
 }
 
 export default App;
 
 // to do:
 //singe player functionalty:
-// draw, win, lose functionality
 // message stating which player won
 // user login
 // refactor functions and state and repettive code and userefs/usestates

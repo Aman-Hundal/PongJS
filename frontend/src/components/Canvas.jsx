@@ -8,8 +8,6 @@ import PlayAgain from './PlayAgain';
 import Result from './Result';
 const Canvas = function(props) {
   const {P1, P2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame, gameOn, endGame, winner} = props;
-  // console.log(scoreP1)
-  // console.log(scoreP2)
   // const fps = 30;
   const canvasRef = useRef(null);
   const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
@@ -19,8 +17,8 @@ const Canvas = function(props) {
   const timerRef = useRef({mins: mins, secs: secs});
   let gameOnRef = useRef(gameOn);
 
-  console.log("ref", gameOnRef.current)
-  console.log("state", gameOn)
+  console.log("ref", gameOnRef.current);
+  console.log("state", gameOn);
 
   const createBoard = (context, ball, rightPaddle, leftPaddle) => {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);

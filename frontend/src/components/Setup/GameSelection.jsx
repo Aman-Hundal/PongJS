@@ -1,6 +1,8 @@
 const GameSelection = (props) => {
     return (
-        <h1>Offline or Online</h1>
+        <div>
+            <h2>Online Mode/Offline Mode</h2>
+        </div>
     )
 }
 

@@ -2,7 +2,7 @@ import './App.css';
 import Canvas from "./components/Canvas";
 import Leaderboard from './components/Leaderboard';
 import Players from './components/Players';
-import UserForm from './components/Setup/UsersForm';
+import Index from './components/Setup/Index';
 import {useState, useEffect} from 'react';
 
 function App() {
@@ -108,7 +108,7 @@ const testData = [
 
   return (
     <div className="App">
-      <UserForm setNameP1={setNameP1} setNameP2={setNameP2} />
+      <Index setNameP1={setNameP1} setNameP2={setNameP2} />
       {/* <Players P1={state.player1} P2={state.player2} /> 
       <Canvas winner={winner} newGame={newGame} endGame={endGame} gameOn={state.gameOn} P1={state.player1} P2={state.player2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
       <Leaderboard matches={testData} /> */}

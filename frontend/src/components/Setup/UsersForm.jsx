@@ -3,3 +3,5 @@ const UserForm = (props) => {
         <h1>Please Enter Name:</h1>
     )
 }
+
+export default UserForm;

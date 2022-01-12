@@ -8,12 +8,22 @@ import {useState, useEffect} from 'react';
 function App() {
 const [state, setState] = useState({
   matches: [{}],
-  player1: {name: "Amo", score: 0},
-  player2: {name: "Goodfella", score: 0},
+  player1: {name: "Player1", score: 0},
+  player2: {name: "Player2", score: 0},
   minutes: 0,
   seconds: 10,
   gameOn: true
 });
+
+const setNameP1 = (name) => {
+  const player1 = {...state.player1, name: name};
+  setState({...state, player1});
+}
+
+const setNameP2 = (name) => {
+  const player2 = {...state.player2, name: name};
+  setState({...state, player2});
+}
 
 const increaseScoreP1 = () => {
   console.log("P1 score increased");
@@ -98,10 +108,10 @@ const testData = [
 
   return (
     <div className="App">
-      <UserForm />
-      <Players P1={state.player1} P2={state.player2} /> 
+      <UserForm setNameP1={setNameP1} setNameP2={setNameP2} />
+      {/* <Players P1={state.player1} P2={state.player2} /> 
       <Canvas winner={winner} newGame={newGame} endGame={endGame} gameOn={state.gameOn} P1={state.player1} P2={state.player2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
-      <Leaderboard matches={testData} />
+      <Leaderboard matches={testData} /> */}
     </div>
   )
 }

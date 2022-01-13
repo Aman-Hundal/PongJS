@@ -12,7 +12,7 @@ const Canvas = function(props) {
   // const fps = 30;
   const canvasRef = useRef(null);
   const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
-  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 0}); //computer speed 15-20
+  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 40}); //computer speed 15-20
   const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, vy: 40});
   const scoreRef = useRef({scoreP1: P1.score, scoreP2: P2.score});
   const timerRef = useRef({mins: mins, secs: secs});
@@ -160,7 +160,7 @@ const Canvas = function(props) {
     ball.speed = 5;
     paddleRight.y = 320;
     paddleLeft.y = 320;
-    paddleRight.vy = 20;
+    // paddleRight.vy = 20;
   }
 
   const startGame = (ball, paddle) => {
@@ -168,7 +168,7 @@ const Canvas = function(props) {
     ball.vx = 5 * direction[Math.floor(Math.random() * direction.length)];
     ball.vy = 0;
     ball.speed = 5;
-    paddle.vy = 20;
+    // paddle.vy = 20;
   }
 
 
@@ -186,17 +186,17 @@ const Canvas = function(props) {
       // console.log(paddle)
     }
 
-    if (key === "ArrowDown" && paddleRight.y < 640) {
+    if (key === "5" && paddleRight.y < 640) {
       paddleRight.y += paddleRight.vy;
       // console.log(paddleLeft)
     }
 
-    if (key === "ArrowUp" && paddleRight.y > 0) {
+    if (key === "8" && paddleRight.y > 0) {
       paddleRight.y -= paddleRight.vy;
       // console.log(paddle)
     }
 
-    if(key === "Enter" && ball.vx === 0 && paddleRight.vy === 0) {
+    if(key === "Enter" && ball.vx === 0) {
       startGame(ball, paddleRight);
     }
   
@@ -206,7 +206,7 @@ const Canvas = function(props) {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
     updateBall(context, ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current);
-    updatePaddleR(context, paddleRRef.current);
+    // updatePaddleR(context, paddleRRef.current);
     createBoard(context, ballRef.current, paddleRRef.current, paddleLRef.current);
     
     if (gameOver(scoreRef.current, timerRef.current)) {

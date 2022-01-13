@@ -10,8 +10,8 @@ const [state, setState] = useState({
   matches: [{}],
   player1: {name: "Player1", score: 0},
   player2: {name: "Player2", score: 0},
-  minutes: 0,
-  seconds: 10,
+  minutes: 1,
+  seconds: 0,
   gameOn: true
 });
 
@@ -56,10 +56,10 @@ const animateTimer = (timerRef) => {
 const newGame = (ball, paddleLeft, paddleRight, scoreRef, timerRef) => {
   const player1 =  {...state.player1, score: state.player1.score = 0};
   const player2 = {...state.player2, score: state.player2.score = 0};
-  setState({...state, player1, player2, minutes: 0, seconds: 10, gameOn: true});
+  setState({...state, player1, player2, minutes: 1, seconds: 0, gameOn: true});
   scoreRef.scoreP1 = 0; 
-  timerRef.mins = 0;
-  timerRef.secs = 10;
+  timerRef.mins = 1;
+  timerRef.secs = 0;
   scoreRef.scoreP2 = 0;
   ball.x = 700;
   ball.y = 400;
@@ -67,7 +67,7 @@ const newGame = (ball, paddleLeft, paddleRight, scoreRef, timerRef) => {
   ball.vy = 0;
   ball.speed = 5;
   paddleRight.y = 320;
-  paddleRight.vy = 0;
+  // paddleRight.vy = 0;
   paddleLeft.y = 320;
 }
 

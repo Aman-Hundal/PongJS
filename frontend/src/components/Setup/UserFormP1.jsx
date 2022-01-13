@@ -1,7 +1,8 @@
 import {useState} from 'react';
+import Button from './Button';
 
 const UserFormP1 = (props) => {
-    const { setPlayerName } = props;
+    const { setPlayerName, cancel } = props;
     const [name, setName] = useState("");
 
     return (
@@ -16,7 +17,8 @@ const UserFormP1 = (props) => {
                 value={name}            
                 />
             </form>
-            <button onClick={event => setPlayerName(name)}>Submit</button>
+            <button onClick={event => setPlayerName(name)}>Confirm</button>
+            <Button message={"Cancel"} onClick={cancel} />
         </main>
     )
 }

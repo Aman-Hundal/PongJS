@@ -6,6 +6,7 @@ import Score from "./Score";
 import Timer from "./Timer";
 import PlayAgain from './PlayAgain';
 import Result from './Result';
+
 const Canvas = function(props) {
   const {P1, P2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame, gameOn, endGame, winner} = props;
   // const fps = 30;

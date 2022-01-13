@@ -15,14 +15,6 @@ const [state, setState] = useState({
   gameOn: true
 });
 
-const confirm = () => {
-  console.log("Confirmed");
-}
-
-const cancel = () => {
-  console.log("Cancelled")
-}
-
 const setNameP1 = (name) => {
   const player1 = {...state.player1, name: name};
   setState({...state, player1});
@@ -120,10 +112,10 @@ const testData = [
 
   return (
     <div className="App">
-      <Index setNameP1={setNameP1} setNameP2={setNameP2} cancel={cancel} confirm={confirm} start={start} />
-      <Players P1={state.player1} P2={state.player2} /> 
+      <Index setNameP1={setNameP1} setNameP2={setNameP2} start={start} />
+      {/* <Players P1={state.player1} P2={state.player2} /> 
       <Canvas winner={winner} newGame={newGame} endGame={endGame} gameOn={state.gameOn} P1={state.player1} P2={state.player2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
-      <Leaderboard matches={testData} />
+      <Leaderboard matches={testData} /> */}
     </div>
   )
 }

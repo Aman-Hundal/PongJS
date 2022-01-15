@@ -6,9 +6,10 @@ import Score from "./Score";
 import Timer from "./Timer";
 import PlayAgain from './PlayAgain';
 import Result from './Result';
+import Players from './Players';
 
 const Canvas = function(props) {
-  const {P1, P2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame, gameOn, endGame, winner} = props;
+  const {P1, P2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame, gameOn, gameOnEnd, winner} = props;
   // const fps = 30;
   const canvasRef = useRef(null);
   const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
@@ -137,19 +138,19 @@ const Canvas = function(props) {
     }
   };
 
-  const updatePaddleR = function(context, paddle) {
-    paddle.y += paddle.vy;
+  // const updatePaddleR = function(context, paddle) {
+  //   paddle.y += paddle.vy;
 
-    if (paddle.y >= context.canvas.height-160) {
-      paddle.vy *= -1;
-      // console.log(paddle)
-    }
+  //   if (paddle.y >= context.canvas.height-160) {
+  //     paddle.vy *= -1;
+  //     // console.log(paddle)
+  //   }
 
-    if (paddle.y <= 0) {
-      paddle.vy *= -1;
-      // console.log(paddle)
-    }
-  };
+  //   if (paddle.y <= 0) {
+  //     paddle.vy *= -1;
+  //     // console.log(paddle)
+  //   }
+  // };
 
   const ballReset = (ball, context, paddleRight, paddleLeft) => {
     const direction = [1, -1];
@@ -211,7 +212,7 @@ const Canvas = function(props) {
     
     if (gameOver(scoreRef.current, timerRef.current)) {
       gameOnRef.current = false;
-      endGame();
+      gameOnEnd();
       console.log("should be false", gameOn)
     }
 
@@ -230,18 +231,17 @@ const Canvas = function(props) {
 
   return(
     <div>
+    <Players P1={P1} P2={P2} />
     <Timer mins={mins} secs={secs} animateTimer={animateTimer} />
     <Score scoreP1={P1.score} scoreP2={P2.score} />
     <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
     </canvas>
-      <div onClick={(event) => {
+    <Result winner={winner} P1={P1} P2={P2} mins={mins} secs={secs} />
+    <PlayAgain trigger={P1.score === 5 || P2.score === 5 || (mins === 0 && secs === 0) ? true : null}  resetGame={() => {
         gameOnRef.current = true;
         newGame(ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current, timerRef.current);
-        console.log(scoreRef.current, timerRef.current)
-      }}>
-        <Result winner={winner} P1={P1} P2={P2} mins={mins} secs={secs} />
-        <PlayAgain trigger={P1.score === 5 || P2.score === 5 || (mins === 0 && secs === 0) ? true : null} /> 
-      </div>
+        // console.log(scoreRef.current, timerRef.current)
+      }} />
     </div>
   )
 };

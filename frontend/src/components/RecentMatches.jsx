@@ -7,10 +7,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import './styles/Leaderboard.css';
 
-export default function Leaderboard(props) {
+export default function RecentMatches(props) {
   const {matches} = props;
   return (
     <TableContainer class="container">
+      <h2>Recent Matches</h2>
       <Table sx={{ width: 600, margin:'auto', background: "black"}} aria-label="simple table">
         <TableHead>
           <TableRow>

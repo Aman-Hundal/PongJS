@@ -1,7 +1,13 @@
+import { Link } from 'react-router-dom';
+
 const PlayAgain = (props) => {
-    const { trigger } = props;
+    const { trigger, resetGame } = props;
     return (
-        trigger ? <button>Play Again?</button> : <h1>Press Enter to Start</h1>
+        trigger ?
+        <div>
+            <button onClick={() => {resetGame()}}>Play Again?</button>
+            <Link to="/"><button onClick={() => {resetGame()}}>Exit Game</button> </Link>
+        </div> : <h2>Press Enter to Start</h2>
     )
 }
 

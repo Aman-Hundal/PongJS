@@ -1,9 +1,9 @@
 import './App.css';
 import Canvas from "./components/Canvas";
-import Leaderboard from './components/Leaderboard';
-import Players from './components/Players';
+import RecentMatches from './components/RecentMatches';
 import Index from './components/Setup/Index';
 import {useState, useEffect} from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
 const [state, setState] = useState({
@@ -71,11 +71,11 @@ const newGame = (ball, paddleLeft, paddleRight, scoreRef, timerRef) => {
   paddleLeft.y = 320;
 }
 
-const endGame = () => {
+const gameOnEnd = () => {
   setState({...state, gameOn: false});
 }
 
-const start = () => {
+const gameOnStart = () => {
   setState({...state, gameOn: true});
 }
 
@@ -111,12 +111,26 @@ const testData = [
 ];
 
   return (
-    <div className="App">
-      <Index setNameP1={setNameP1} setNameP2={setNameP2} start={start} />
-      {/* <Players P1={state.player1} P2={state.player2} /> 
-      <Canvas winner={winner} newGame={newGame} endGame={endGame} gameOn={state.gameOn} P1={state.player1} P2={state.player2} increaseScoreP1={increaseScoreP1} increaseScoreP2={increaseScoreP2} mins={state.minutes} secs={state.seconds} animateTimer={animateTimer} />
-      <Leaderboard matches={testData} /> */}
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Index setNameP1={setNameP1} setNameP2={setNameP2} start={gameOnStart}/>} />
+          <Route path="/play" element={<Canvas 
+          winner={winner} 
+          newGame={newGame} 
+          gameOnEnd={gameOnEnd} 
+          gameOn={state.gameOn} 
+          P1={state.player1} 
+          P2={state.player2} 
+          increaseScoreP1={increaseScoreP1} 
+          increaseScoreP2={increaseScoreP2} 
+          mins={state.minutes} 
+          secs={state.seconds} 
+          animateTimer={animateTimer} />} />
+        </Routes>
+        <RecentMatches matches={testData} />
+      </div>
+    </BrowserRouter>
   )
 }
 
@@ -124,8 +138,9 @@ export default App;
 
 // to do:
 //singe player functionalty:
-// user login
 // refactor functions and state and repettive code and userefs/usestates
+//timer only starts on enter (game on only true on start ? )
+// false game on = no animater or timer, -> enter to trigger game on to true(and therefor eanimation and timer) -> gameover = game on False -> playagain -> game on True / start - game on True
 
 //multiplayer functionality:
 // websockets at multiplayer functionality

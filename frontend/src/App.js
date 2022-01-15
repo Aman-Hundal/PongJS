@@ -138,10 +138,11 @@ export default App;
 
 // to do:
 //singe player functionalty:
+// styling!!!! + refactor of components
 // refactor functions and state and repettive code and userefs/usestates
 //timer only starts on enter (game on only true on start ? )
 // false game on = no animater or timer, -> enter to trigger game on to true(and therefor eanimation and timer) -> gameover = game on False -> playagain -> game on True / start - game on True
 
 //multiplayer functionality:
 // websockets at multiplayer functionality
-// leaderboard = recent game scores of last 5 games MONGO DB + backend work
+// recent matches live data = recent game scores of last 5 games MONGO DB + backend work

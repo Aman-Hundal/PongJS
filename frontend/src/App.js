@@ -139,6 +139,7 @@ export default App;
 // to do:
 //singe player functionalty:
 // styling!!!! + refactor of components
+// confirm that paddle two is IDENTICAL in speed size shape x y vy vx as it seems slow
 // refactor functions and state and repettive code and userefs/usestates
 //timer only starts on enter (game on only true on start ? )
 // false game on = no animater or timer, -> enter to trigger game on to true(and therefor eanimation and timer) -> gameover = game on False -> playagain -> game on True / start - game on True

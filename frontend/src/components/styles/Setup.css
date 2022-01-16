@@ -1,0 +1,11 @@
+#gamemode-list {
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.gamemode-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

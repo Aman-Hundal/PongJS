@@ -5,7 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import './styles/Leaderboard.css';
+import './styles/RecentMatches.css';
 
 export default function RecentMatches(props) {
   const {matches} = props;

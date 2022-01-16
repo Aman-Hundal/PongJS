@@ -1,3 +1,9 @@
+body {
+  /* background-color: #cdc8c5; */
+  background-color: #f5f1ed;
+  /* color: #B62F28; */
+}
+
 .App {
   text-align: center;
   font-family: 'Press Start 2P', cursive;

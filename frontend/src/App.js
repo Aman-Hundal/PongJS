@@ -1,6 +1,5 @@
 import './App.css';
 import Canvas from "./components/Canvas";
-import RecentMatches from './components/RecentMatches';
 import Index from './components/Setup/Index';
 import {useState, useEffect} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -126,9 +125,9 @@ const testData = [
           increaseScoreP2={increaseScoreP2} 
           mins={state.minutes} 
           secs={state.seconds} 
-          animateTimer={animateTimer} />} />
+          animateTimer={animateTimer}
+          matches={testData} />} />
         </Routes>
-        <RecentMatches matches={testData} />
       </div>
     </BrowserRouter>
   )

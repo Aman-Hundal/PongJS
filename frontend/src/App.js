@@ -137,7 +137,7 @@ export default App;
 
 // to do:
 //singe player functionalty:
-// styling!!!! + refactor of components
+//  overall -> refine styling -> confirm paddle 2 speed -> add express server api and mongo -> refactor -> bug fix + game functionality fix --> multipalyer mode
 // confirm that paddle two is IDENTICAL in speed size shape x y vy vx as it seems slow
 // refactor functions and state and repettive code and userefs/usestates
 //timer only starts on enter (game on only true on start ? )

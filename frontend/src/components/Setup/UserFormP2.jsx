@@ -24,7 +24,7 @@ const UserFormP2 = (props) => {
                 setPlayerName(name)
                 transition("START")}
                 }>Confirm</p>
-            <p className="form-button-content" onClick={() => back()} >Cancel</p>
+            <p className="form-button-content" onClick={() => back()} >Back</p>
             </div>
         </main>
     )

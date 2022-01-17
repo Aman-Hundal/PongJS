@@ -40,14 +40,32 @@
     color: #B62F28;
 }
 
-.start-button {
+.start-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 5px solid;
+    width: 30%;
+    height: 30%;
+    margin: auto;
+}
+
+.start-card-content {
     cursor: pointer;
-    font-size: larger;
-    padding-top: 50px;
+    font-size: 20px;
+}
+
+.start-card-content:hover {
+    color: #B62F28;
+}
+
+.start-card-link {
+    cursor: pointer;
+    font-size: 20px;
     text-decoration: none;
     color: black;
 }
 
-.start-button:hover {
+.start-card-link:hover {
     color: #B62F28;
 }

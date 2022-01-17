@@ -103,10 +103,10 @@ const winner = function(player1, player2, minutes, seconds) {
 //testdata
 const testData = [
   {id: 1, p1: "Amo", p2: "Elliot", score:[5,3], winner: "Amo"},
-  {id: 2, p1: "Paul", p2: "Peter", score:[0,5], winner: "Peter"},
+  {id: 2, p1: "Jamie", p2: "Robb", score:[0,5], winner: "Robb"},
   {id: 3, p1: "Aragorn", p2: "Gandalf", score:[5,4], winner: "Aragorn"},
   {id: 4, p1: "Tobey", p2: "Andrew", score:[3,5], winner: "Andrew"},
-  {id: 5, p1: "Amo", p2: "Viggo", score:[5,5], winner: "Draw"}
+  {id: 5, p1: "Roger", p2: "Don", score:[5,5], winner: "Draw"}
 ];
 
   return (
@@ -137,7 +137,7 @@ export default App;
 
 // to do:
 //singe player functionalty:
-//  overall -> refine styling -> confirm paddle 2 speed -> add express server api and mongo -> refactor -> bug fix + game functionality fix --> multipalyer mode
+//  overall -> add express server api and mongo -> refactor -> refine styling -> bug fix + game functionality fix --> multipalyer mode
 // confirm that paddle two is IDENTICAL in speed size shape x y vy vx as it seems slow
 // refactor functions and state and repettive code and userefs/usestates
 //timer only starts on enter (game on only true on start ? )

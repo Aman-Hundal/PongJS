@@ -10,3 +10,8 @@ table {
   padding-top: 15px;
   padding-bottom: 15px;
 }
+
+.table-content {
+  font-family: 'Press Start 2P', cursive !important;
+  font-size: small;
+}

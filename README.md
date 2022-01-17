@@ -12,6 +12,8 @@ Online multiplayer browser mode is still a WIP. Will use MONGO DB, Express.js an
 
 ### Screenshots
 
+!["GameMode"](https://github.com/Aman-Hundal/PongJS/blob/main/docs/start.png?raw=true)
+!["PlayEntry"](https://github.com/Aman-Hundal/PongJS/blob/main/docs/start.png?raw=true)
 !["Start"](https://github.com/Aman-Hundal/PongJS/blob/main/docs/start.png?raw=true)
 !["Play"](https://github.com/Aman-Hundal/PongJS/blob/main/docs/play.png?raw=true)
 !["Winner"](https://github.com/Aman-Hundal/PongJS/blob/main/docs/winner.png?raw=true)

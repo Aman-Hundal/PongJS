@@ -3,6 +3,11 @@
     cursor: pointer;
 }
 
+.playerform input {
+    padding: 10px;
+    width: 50%;
+}
+
 .list-item:hover {
     color: #B62F28;
 }

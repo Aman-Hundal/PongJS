@@ -13,7 +13,7 @@ const UserFormP1 = (props) => {
                 <input
                 onChange={event => setName(event.target.value)} 
                 name="Player Name:"
-                placeholder="Please Enter Player Name"
+                placeholder=""
                 type="text"
                 value={name}            
                 />

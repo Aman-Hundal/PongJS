@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import '../styles/Setup.css';
 
 const UserFormP2 = (props) => {
     const { setPlayerName, transition, back } = props;
@@ -6,6 +7,7 @@ const UserFormP2 = (props) => {
 
     return (
         <main className="playerform">
+            <div className="form-main">
             <h2>Please Enter Player Two Name:</h2>
             <form onSubmit={event => setName(event)} autoComplete="off">
                 <input
@@ -16,11 +18,14 @@ const UserFormP2 = (props) => {
                 value={name}            
                 />
             </form>
-            <button onClick={() => {
+            </div>
+            <div className="form-button">
+            <p className="form-button-content" onClick={() => {
                 setPlayerName(name)
                 transition("START")}
-                }>Confirm</button>
-            <button onClick={() => back()} >Cancel</button>
+                }>Confirm</p>
+            <p className="form-button-content" onClick={() => back()} >Cancel</p>
+            </div>
         </main>
     )
 }

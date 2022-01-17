@@ -1,12 +1,12 @@
 import UserFormP1 from './UserFormP1';
 import UserFormP2 from './UserFormP2';
 import GameModeSelection from './GameModeSelection';
-import Button from './Button';
 import useVisualMode from '../../hooks/useVisualMode';
 import { Link } from 'react-router-dom';
+import '../styles/Setup.css';
 
 const Index = (props) => {
-  const {setNameP1, setNameP2, start} = props;
+  const {setNameP1, setNameP2} = props;
   const INDEX = "INDEX";
   const CONFIRMP1 = "CONFIRMP1";
   const CONFIRMP2 = "CONFIRMP2";
@@ -15,11 +15,11 @@ const Index = (props) => {
   
   return (
     <div>
-      <h1>Welcome to Pong!</h1>
+      <h1>Welcome to Pong</h1>
       {mode === "INDEX" && <GameModeSelection transition={transition} />}
       {mode === CONFIRMP1 && <UserFormP1 setPlayerName={setNameP1} back={back} transition={transition} />}
       {mode === CONFIRMP2 && <UserFormP2 setPlayerName={setNameP2}  back={back} transition={transition} />}
-      {mode === START && <Link to='/play'><Button message={"Start Game!"}/></Link>}
+      {mode === START && <Link className="start-button" to='/play'><p className="start-button">Start Game!</p></Link>}
     </div>
   )
 }

@@ -5,7 +5,7 @@ const Result = function(props) {
   let result = winner(P1, P2, mins, secs); 
   return (
     result ? 
-    <div >
+    <div id="result-text">
       <h1>Result: {result}</h1>
     </div> : ""
   )

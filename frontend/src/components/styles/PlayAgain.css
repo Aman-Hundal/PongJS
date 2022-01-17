@@ -1,0 +1,15 @@
+.playagain-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.playagain-content {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.playagain-content:hover {
+    color: #B62F28;
+}

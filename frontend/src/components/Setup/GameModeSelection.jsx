@@ -1,5 +1,4 @@
 import '../styles/Setup.css';
-import Button from './Button';
 
 const GameModeSelection = (props) => {
     const { transition} = props;

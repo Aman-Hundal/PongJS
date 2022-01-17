@@ -21,3 +21,33 @@
     margin: auto;
 
 }
+
+.playerform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 5px solid;
+    width: 30%;
+    height: 30%;
+    margin: auto;
+}
+
+.form-button {
+    cursor: pointer;
+}
+
+.form-button-content:hover {
+    color: #B62F28;
+}
+
+.start-button {
+    cursor: pointer;
+    font-size: larger;
+    padding-top: 50px;
+    text-decoration: none;
+    color: black;
+}
+
+.start-button:hover {
+    color: #B62F28;
+}

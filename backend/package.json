@@ -1,5 +1,14 @@
 {
+  "scripts": {
+    "start": "nodemon server.js"
+  },
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mongoose": "^6.1.7",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "dotenv": "^14.2.0",
+    "nodemon": "^2.0.15"
   }
 }

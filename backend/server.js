@@ -1,27 +1,27 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const matches = require('./routes/matches');
 const morgan = require('morgan');
-const mongoose = require('mongoose'); 
+const mongoose = require('mongoose');  // ODM system for MongoDB (creates models for collections and etc)
 const port = process.env.PORT || 3001;
+const dbURL = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.nilng.mongodb.net/${process.env.MONGODB_HOST}?retryWrites=true&w=majority`;
 
 //DB setup
-// mongoose.connect('mongodb://localhost/matches', {useNewUrlParser: true}); //connects to mongo DB. Mongoose is an express/node.js package that allows for ease use between mongo db and node/express. ITS AN ORM
-// const db = mongoose.connection;
-// db.on('error', (error) => console.log(error));
-// db.once('open', () => console.log("Connected to database"));
+mongoose.connect(dbURL)
+  .then((result) => {
+    app.listen(port, () => {
+      console.log("DB connected. Server listening on port 3001.");
+    })
+  })
+  .catch((error) => console.error(error));
 
-//middleware
+  //middleware
 app.use(morgan('dev'));
 
-//router routes
+//routes
 app.use('/matches', matches);
-
 
 app.get('/', (req, res) => {
   res.send("Welcome to PongJS Index");
-})
-
-app.listen(port, () => {
-  console.log("Server listening on port 3001");
 })

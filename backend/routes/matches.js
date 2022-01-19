@@ -3,7 +3,13 @@ const router = express.Router();
 const Match = require('../db/models/matchModel');
 
 router.get('/', (req, res) => {
-  res.send(Match.all)
+  Match.find() //method on the model itself.
+  .then((result) => {
+    res.send(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  })
 })
 
 router.post('/', (req, res) => {

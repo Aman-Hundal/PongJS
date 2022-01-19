@@ -25,6 +25,3 @@ const Match = mongoose.model('Match', matchSchema); //first arg is name of model
 module.exports = Match;
 
 
-  
-//schema for matches
-//id property (auto), player 1 string, player 2 string, score number array, winner string

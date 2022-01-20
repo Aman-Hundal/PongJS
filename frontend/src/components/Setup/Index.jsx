@@ -3,7 +3,6 @@ import UserFormP2 from './UserFormP2';
 import GameModeSelection from './GameModeSelection';
 import useVisualMode from '../../hooks/useVisualMode';
 import Start from './Start';
-import { Link } from 'react-router-dom';
 import '../styles/Setup.css';
 
 const Index = (props) => {

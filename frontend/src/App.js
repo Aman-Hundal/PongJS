@@ -3,6 +3,7 @@ import Canvas from "./components/Canvas";
 import Index from './components/Setup/Index';
 import {useState, useEffect} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
 
 function App() {
 const [state, setState] = useState({
@@ -13,6 +14,22 @@ const [state, setState] = useState({
   seconds: 0,
   gameOn: true
 });
+
+const baseURL = "http://localhost:3001";
+
+useEffect(() => {
+  const matchesPromise = axios.get(baseURL+"/matches");
+  const promises = [matchesPromise];
+
+  Promise.all(promises)
+  .then((allData) => {
+    console.log(allData);
+    setState(prev => ({...prev, matches: allData[0].data}));
+  })
+  .catch((error) => {
+    console.error(error);
+  })
+}, [])
 
 const setNameP1 = (name) => {
   const player1 = {...state.player1, name: name};
@@ -137,7 +154,8 @@ export default App;
 
 // to do:
 //singe player functionalty:
-//  overall -> add express server api and mongo -> refactor -> refine styling -> bug fix + game functionality fix --> multipalyer mode
+//  overall -> add express server api and mongo -> refactor -> refine styling -> bug fix + game functionality fix --> multipalyer mode 
+// KEY -> need a function that exeuctes on paly agian or exit button clikc that sends data to post request via axios to db. Do i clean up the data in front end or back end ? (do i fix it up and ship it as already made docuent/object in front end via a fucncton OR do i send a blob of data  (player obecjects ) and oganize and adjsut in the backend to a document)
 // confirm that paddle two is IDENTICAL in speed size shape x y vy vx as it seems slow
 // refactor functions and state and repettive code and userefs/usestates
 //timer only starts on enter (game on only true on start ? )

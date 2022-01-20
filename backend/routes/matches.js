@@ -13,7 +13,21 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  res.send("Creating Matches!");
+  const data = req.body;
+  const match = {
+    player1: data.player1,
+    player2: data.player2,
+    score: data.score,
+    winner: data.winner
+  };
+
+  match.save()
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  })
 })
 
 // test of mongo db and creating a match document (using match model) for matches collections

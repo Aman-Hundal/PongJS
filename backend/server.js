@@ -6,18 +6,23 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');  // ODM system for MongoDB (creates models for collections and etc)
 const port = process.env.PORT || 3001;
 const dbURL = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.nilng.mongodb.net/${process.env.MONGODB_HOST}?retryWrites=true&w=majority`;
+const cors = require('cors');
 
 //DB setup
 mongoose.connect(dbURL)
-  .then((result) => {
-    app.listen(port, () => {
-      console.log("DB connected. Server listening on port 3001.");
-    })
+.then((result) => {
+  app.listen(port, () => {
+    console.log("DB connected. Server listening on port 3001.");
   })
-  .catch((error) => console.error(error));
+})
+.catch((errors) => {
+  console.error(error);
+})
 
-  //middleware
+//middleware
+app.use(express.json());
 app.use(morgan('dev'));
+app.use(cors());
 
 //routes
 app.use('/matches', matches);

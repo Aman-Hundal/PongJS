@@ -23,7 +23,7 @@ export default function RecentMatches(props) {
         <TableBody>
           {matches.map((match) => (
             <TableRow key={match.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell className="table-content" sx={{color: "white"}}>{match.p1} vs. {match.p2}</TableCell>
+              <TableCell className="table-content" sx={{color: "white"}}>{match.player1} vs. {match.player2}</TableCell>
               <TableCell className="table-content" sx={{color: "white"}}>{match.score[0]} - {match.score[1]}</TableCell>
               <TableCell className="table-content" sx={{color: "white"}}>{match.winner}</TableCell>
             </TableRow>

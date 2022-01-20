@@ -2,6 +2,17 @@ const express = require('express');
 const router = express.Router();
 const Match = require('../db/models/matchModel');
 
+const matchWinner = function(player1Obj, player2Obj) {
+  console.log(player1Obj.score)
+  if (player1Obj.score > player2Obj.score) {
+    return player1Obj.name;
+  } else if (player1Obj.score < player2Obj.score) {
+    return player2Obj.name;
+  } else {
+    return "Draw";
+  }
+}
+
 router.get('/', (req, res) => {
   Match.find() //method on the model itself.
   .then((result) => {
@@ -14,12 +25,13 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const data = req.body;
-  const match = {
-    player1: data.player1,
-    player2: data.player2,
-    score: data.score,
-    winner: data.winner
-  };
+
+  const match = new Match({
+    player1: data.player1.name,
+    player2: data.player2.name,
+    score: [data.player1.score, data.player2.score],
+    winner: matchWinner(data.player1, data.player2)
+  });
 
   match.save()
   .then((result) => {

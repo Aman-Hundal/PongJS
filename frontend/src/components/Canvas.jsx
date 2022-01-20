@@ -10,7 +10,7 @@ import Players from './Players';
 import RecentMatches from './RecentMatches';
 
 const Canvas = function(props) {
-  const {P1, P2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame, gameOn, gameOnEnd, winner, matches} = props;
+  const {P1, P2, increaseScoreP1, increaseScoreP2, mins, secs, animateTimer, newGame, gameOn, gameOnEnd, winner, matches, saveMatch} = props;
   // const fps = 30;
   const canvasRef = useRef(null);
   const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
@@ -240,6 +240,7 @@ const Canvas = function(props) {
     <Result winner={winner} P1={P1} P2={P2} mins={mins} secs={secs} />
     <PlayAgain trigger={P1.score === 5 || P2.score === 5 || (mins === 0 && secs === 0) ? true : null}  resetGame={() => {
         gameOnRef.current = true;
+        saveMatch(P1, P2);
         newGame(ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current, timerRef.current);
         // console.log(scoreRef.current, timerRef.current)
       }} />

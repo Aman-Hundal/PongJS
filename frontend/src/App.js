@@ -157,7 +157,7 @@ export default App;
 
 // to do:
 //singe player functionalty:
-// BUGS ->refreshing or hitting back from Canvas BREAKS RENDER and cannot read property of 0 + if you hold both user keys one sides user input is halted + 
+// BUGS ->refreshing or hitting back from Canvas BREAKS RENDER and TypeError: Cannot read property 'getContext' of null + if you hold both user keys one sides user input is halted + 
 // overall -> refactor -> refine styling -> bug fix + game functionality fix --> multipalyer mode 
 // refactor functions and state and repettive code and userefs/usestates
 // timer only starts on enter (game on only true on start ? )

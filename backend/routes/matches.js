@@ -15,6 +15,8 @@ const matchWinner = function(player1Obj, player2Obj) {
 
 router.get('/', (req, res) => {
   Match.find() //method on the model itself.
+  .sort({_id: -1})
+  .limit(10)
   .then((result) => {
     res.send(result);
   })
@@ -25,7 +27,6 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const data = req.body;
-
   const match = new Match({
     player1: data.player1.name,
     player2: data.player2.name,
@@ -34,8 +35,13 @@ router.post('/', (req, res) => {
   });
 
   match.save()
-  .then((result) => {
-    console.log(result);
+  .then(() => {
+    Match.find()
+    .sort({_id: -1})
+    .limit(10)
+    .then((result) => {
+      res.send(result);
+    })
   })
   .catch((error) => {
     console.error(error);

@@ -14,7 +14,6 @@ const [state, setState] = useState({
   seconds: 0,
   gameOn: true
 });
-
 const baseURL = "http://localhost:3001";
 
 useEffect(() => {
@@ -23,7 +22,7 @@ useEffect(() => {
 
   Promise.all(promises)
   .then((allData) => {
-    console.log(allData[0].data);
+    // console.log(allData[0].data);
     setState(prev => ({...prev, matches: allData[0].data}));
   })
   .catch((error) => {
@@ -31,13 +30,17 @@ useEffect(() => {
   })
 }, [])
 
-const saveMatch = (player1Obj, player2Obj) => {
+const saveMatch = () => {
   axios.post(baseURL+"/matches", {
-    player1: player1Obj,
-    player2: player2Obj,
+    player1: state.player1,
+    player2: state.player2
   })
-  .then((result) =>{
-    console.log("Data sent to DB");
+  .then(response => {
+    // console.log("RESPONSE", response.data);
+    const newMatches = response.data;
+    const player1 =  {...state.player1, score: state.player1.score = 0};
+    const player2 = {...state.player2, score: state.player2.score = 0};
+    setState(prev => ({...prev, matches: newMatches, player1, player2, minutes: 1, seconds: 0, gameOn: true}));
   })
   .catch(error => console.error(error));
 }
@@ -81,9 +84,6 @@ const animateTimer = (timerRef) => {
 }
 
 const newGame = (ball, paddleLeft, paddleRight, scoreRef, timerRef) => {
-  const player1 =  {...state.player1, score: state.player1.score = 0};
-  const player2 = {...state.player2, score: state.player2.score = 0};
-  setState({...state, player1, player2, minutes: 1, seconds: 0, gameOn: true});
   scoreRef.scoreP1 = 0; 
   timerRef.mins = 1;
   timerRef.secs = 0;
@@ -128,15 +128,6 @@ const winner = function(player1, player2, minutes, seconds) {
   return null;
 }
 
-//testdata
-// const testData = [
-//   {id: 1, p1: "Amo", p2: "Elliot", score:[5,3], winner: "Amo"},
-//   {id: 2, p1: "Jamie", p2: "Robb", score:[0,5], winner: "Robb"},
-//   {id: 3, p1: "Aragorn", p2: "Gandalf", score:[5,4], winner: "Aragorn"},
-//   {id: 4, p1: "Tobey", p2: "Andrew", score:[3,5], winner: "Andrew"},
-//   {id: 5, p1: "Roger", p2: "Don", score:[5,5], winner: "Draw"}
-// ];
-
   return (
     <BrowserRouter>
       <div className="App">
@@ -166,14 +157,11 @@ export default App;
 
 // to do:
 //singe player functionalty:
-// BUGS -> refreshing or hitting back from Canvas BREAKS RENDER and cannot read property of 0 + REcent matches does not get updated after match is completed. + need to reverse order of matches to get most recent first. Mongo db is recorded straight up from oldest to recent + limit 10 matches
-//  overall -> add express server api and mongo -> refactor -> refine styling -> bug fix + game functionality fix --> multipalyer mode 
-// KEY -> need a function that exeuctes on paly agian or exit button clikc that sends data to post request via axios to db. Do i clean up the data in front end or back end ? (do i fix it up and ship it as already made docuent/object in front end via a fucncton OR do i send a blob of data  (player obecjects ) and oganize and adjsut in the backend to a document)
-// confirm that paddle two is IDENTICAL in speed size shape x y vy vx as it seems slow
+// BUGS ->refreshing or hitting back from Canvas BREAKS RENDER and cannot read property of 0 + if you hold both user keys one sides user input is halted + 
+// overall -> refactor -> refine styling -> bug fix + game functionality fix --> multipalyer mode 
 // refactor functions and state and repettive code and userefs/usestates
-//timer only starts on enter (game on only true on start ? )
+// timer only starts on enter (game on only true on start ? )
 // false game on = no animater or timer, -> enter to trigger game on to true(and therefor eanimation and timer) -> gameover = game on False -> playagain -> game on True / start - game on True
 
 //multiplayer functionality:
 // websockets at multiplayer functionality
-// recent matches live data = recent game scores of last 5 games MONGO DB + backend work

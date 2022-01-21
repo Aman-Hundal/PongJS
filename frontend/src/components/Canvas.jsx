@@ -175,25 +175,27 @@ const Canvas = function(props) {
 
 
   const userInput = (paddleLeft, paddleRight, ball, key) => {
-    const paddleTop = paddleLeft.y;
-    const paddleBottom = paddleLeft.y + paddleLeft.h;
+    const paddleLTop = paddleLeft.y;
+    const paddleLBottom = paddleLeft.y + paddleLeft.h;
+    const paddleRTop = paddleRight.y;
+    const paddleRBottom = paddleRight.y + paddleRight.h;
 
-    if (key === "s" && paddleBottom < 800) {
+    if (key === "s" && paddleLBottom < 800) {
       paddleLeft.y += paddleLeft.vy;
       // console.log(paddleLeft)
     }
 
-    if (key === "w" && paddleTop > 0) {
+    if (key === "w" && paddleLTop > 0) {
       paddleLeft.y -= paddleLeft.vy;
       // console.log(paddle)
     }
 
-    if (key === "5" && paddleRight.y < 640) {
+    if (key === "5" && paddleRBottom < 800) {
       paddleRight.y += paddleRight.vy;
       // console.log(paddleLeft)
     }
 
-    if (key === "8" && paddleRight.y > 0) {
+    if (key === "8" && paddleRTop > 0) {
       paddleRight.y -= paddleRight.vy;
       // console.log(paddle)
     }
@@ -240,9 +242,9 @@ const Canvas = function(props) {
     <Result winner={winner} P1={P1} P2={P2} mins={mins} secs={secs} />
     <PlayAgain trigger={P1.score === 5 || P2.score === 5 || (mins === 0 && secs === 0) ? true : null}  resetGame={() => {
         gameOnRef.current = true;
-        saveMatch(P1, P2);
+        saveMatch();
         newGame(ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current, timerRef.current);
-        // console.log(scoreRef.current, timerRef.current)
+        // console.log("NEW SCORE", scoreRef.current, timerRef.current)
       }} />
     <RecentMatches matches={matches} />
     </div>

@@ -154,14 +154,3 @@ const winner = function(player1, player2, minutes, seconds) {
 }
 
 export default App;
-
-// to do:
-//singe player functionalty:
-// BUGS ->refreshing or hitting back from Canvas BREAKS RENDER and cannot read property of 0 + if you hold both user keys one sides user input is halted + 
-// overall -> refactor -> refine styling -> bug fix + game functionality fix --> multipalyer mode 
-// refactor functions and state and repettive code and userefs/usestates
-// timer only starts on enter (game on only true on start ? )
-// false game on = no animater or timer, -> enter to trigger game on to true(and therefor eanimation and timer) -> gameover = game on False -> playagain -> game on True / start - game on True
-
-//multiplayer functionality:
-// websockets at multiplayer functionality

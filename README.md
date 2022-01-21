@@ -5,8 +5,9 @@
 ### Single Player
 1. Clone the Repository
 2. Go to Cloned Repository folder and install dependencies with `npm i`
-3. Go into frontend and start up frontend with `npm start`.
-4. Go to localhost:3000 Grab a friend and play offline mode
+3. Make a copy of the .env copy file and add in DB information.
+4. Go into frontend and start up frontend with `npm start`.
+5. Go to localhost:3000 Grab a friend and play offline mode
 
 Single player mode allows users to play to 5 points, and timer set to 3 minutes. Player One uses WASD keys and Player Two uses 8456 keys to control their paddles. Pong Game was created with HTML canvas and simple ball collision physics were implemented allowing users to aim their shots.
 

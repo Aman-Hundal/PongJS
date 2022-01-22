@@ -22,7 +22,6 @@ const Canvas = function(props) {
   // const fps = 30;
   // console.log("ref", gameOnRef.current);
   // console.log("state", gameOn);
-
   const render = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions

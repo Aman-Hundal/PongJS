@@ -5,7 +5,7 @@
 ### Single Player
 1. Clone the Repository
 2. Go to Cloned Repository folder and install dependencies with `npm i`
-3. Make a copy of the .env copy file and add in DB information.
+3. Remove the "copy" from the .env copy file and add in DB information.
 4. Go into frontend and start up frontend with `npm start`.
 5. Go to localhost:3000 Grab a friend and play offline mode
 

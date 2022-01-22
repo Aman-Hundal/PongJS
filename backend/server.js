@@ -15,8 +15,8 @@ mongoose.connect(dbURL)
     console.log("DB connected. Server listening on port 3001.");
   })
 })
-.catch((errors) => {
-  console.error(error);
+.catch((error) => {
+  console.log(error);
 })
 
 //middleware

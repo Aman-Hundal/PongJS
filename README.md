@@ -20,6 +20,6 @@ Online multiplayer browser mode is still a WIP. Will use websockets and more to 
 ### Screenshots
 !["GameMode"](https://github.com/Aman-Hundal/PongJS/blob/main/docs/gameMode.png?raw=true)
 !["PlayEntry"](https://github.com/Aman-Hundal/PongJS/blob/main/docs/PlayerName.png?raw=true)
-!["Start"](https://github.com/Aman-Hundal/PongJS/blob/main/docs/Start%3F.png?raw=true)
+!["Start"](https://github.com/Aman-Hundal/PongJS/blob/main/docs/Start.png?raw=true)
 !["Play"](https://github.com/Aman-Hundal/PongJS/blob/main/docs/Play.png?raw=true)
 !["Winner"](https://github.com/Aman-Hundal/PongJS/blob/main/docs/gameOver.png?raw=true)

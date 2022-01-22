@@ -25,9 +25,3 @@ const Index = (props) => {
 }
 
 export default Index;
-
-// flow:
-// choose game mode -> player 1 form -> player 2 form -> start game (triggers gameOn state to true) -> router to canvas x
-// can confirm or cancel. Cancel goes backwd, confirm goes fwd. once start game selected trigger state and go to canvas using routes. x
-// index is managed via history stack like shceduler. x
-// react router is used to transfer from index -> canvas x

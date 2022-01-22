@@ -26,7 +26,6 @@ app.use(cors());
 
 //routes
 app.use('/matches', matches);
-
 app.get('/', (req, res) => {
   res.send("Welcome to PongJS Index");
 })

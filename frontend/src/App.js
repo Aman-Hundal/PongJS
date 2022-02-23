@@ -22,11 +22,13 @@ function App() {
     resetGame
   } = useAppData();
 
+  console.log(state.matches)
+
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Index setNameP1={setNameP1} setNameP2={setNameP2} start={gameOnStart}/>} />
+          <Route path="/" element={<Index setNameP1={setNameP1} setNameP2={setNameP2} start={gameOnStart} matches={state.matches}/>} />
           <Route path="/play" element={<Canvas 
           updateBall={updateBall}
           resetGame={resetGame}
@@ -41,7 +43,6 @@ function App() {
           mins={state.minutes} 
           secs={state.seconds} 
           animateTimer={animateTimer}
-          matches={state.matches}
           saveMatch={saveMatch} />} />
         </Routes>
       </div>

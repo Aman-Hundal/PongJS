@@ -9,9 +9,12 @@ import './styles/RecentMatches.css';
 
 export default function RecentMatches(props) {
   const {matches} = props;
+
   return (
     <TableContainer class="container">
-      <h2>Recent Matches</h2>
+      <div className= "table-titleCard">
+        <h2 className= "table-title">Recent Matches</h2>
+      </div>
       <Table sx={{ width: 600, margin:'auto', background: "black"}} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -22,11 +25,12 @@ export default function RecentMatches(props) {
         </TableHead>
         <TableBody>
           {matches.map((match) => (
+            match.score ? 
             <TableRow key={match.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell className="table-content" sx={{color: "white"}}>{match.player1} vs. {match.player2}</TableCell>
               <TableCell className="table-content" sx={{color: "white"}}>{match.score[0]} - {match.score[1]}</TableCell>
               <TableCell className="table-content" sx={{color: "white"}}>{match.winner}</TableCell>
-            </TableRow>
+            </TableRow> : null
           ))}
         </TableBody>
       </Table>

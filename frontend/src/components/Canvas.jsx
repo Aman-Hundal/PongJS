@@ -7,11 +7,10 @@ import Timer from "./Timer";
 import PlayAgain from './PlayAgain';
 import Result from './Result';
 import Players from './Players';
-import RecentMatches from './RecentMatches';
 import {  createBoard, gameOver, userInput } from '../helpers/canvasHelpers';
 
 const Canvas = function(props) {
-  const {P1, P2, updateBall, mins, secs, animateTimer, gameOn, gameOnEnd, winner, matches, resetGame} = props;
+  const {P1, P2, updateBall, mins, secs, animateTimer, gameOn, gameOnEnd, winner, resetGame} = props;
   const canvasRef = useRef(null);
   const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
   const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 40}); //computer speed 15-20
@@ -24,6 +23,11 @@ const Canvas = function(props) {
   // console.log("state", gameOn);
   const render = () => {
     const canvas = canvasRef.current;
+    
+    if (!canvas) {
+      return;
+    }
+
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
     updateBall(context, ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current);
     // updatePaddleR(context, paddleRRef.current); //old computer paddle code
@@ -56,7 +60,6 @@ const Canvas = function(props) {
     <PlayAgain trigger={P1.score === 5 || P2.score === 5 || (mins === 0 && secs === 0) ? true : null}  resetGame={() => {
       resetGame(ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current, timerRef.current)
       gameOnRef.current = true;}} />
-    <RecentMatches matches={matches} />
     </div>
   )
 };

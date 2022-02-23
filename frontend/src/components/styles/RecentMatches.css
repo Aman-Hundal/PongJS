@@ -7,11 +7,20 @@ table {
 }
 
 .container {
-  padding-top: 15px;
+  padding-top: 25px;
   padding-bottom: 15px;
 }
 
 .table-content {
   font-family: 'Press Start 2P', cursive !important;
   font-size: small;
+}
+
+.table-titleCard {
+  display: flex;
+  justify-content: center;
+}
+
+.table-title {
+  font-family: 'Press Start 2P', cursive !important;
 }

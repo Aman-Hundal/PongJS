@@ -15,11 +15,6 @@ const Index = (props) => {
   const CONFIRMP2 = "CONFIRMP2";
   const START = "START";
   const { mode, transition, back } = useVisualMode(INDEX);
-
-
-  useEffect(() => {
-    
-  })
   
   return (
     <div>

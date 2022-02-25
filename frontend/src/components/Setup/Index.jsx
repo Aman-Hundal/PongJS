@@ -5,7 +5,6 @@ import useVisualMode from '../../hooks/useVisualMode';
 import RecentMatches from '../RecentMatches';
 import Start from './Start';
 import '../styles/Setup.css';
-import { useEffect } from 'react';
 
 const Index = (props) => {
   const {matches} = props;

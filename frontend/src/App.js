@@ -22,8 +22,6 @@ function App() {
     resetGame
   } = useAppData();
 
-  console.log(state.matches)
-
   return (
     <BrowserRouter>
       <div className="App">

@@ -28,8 +28,6 @@ const Canvas = function(props) {
       return;
     }
 
-    console.log("NAME", localStorage.getItem("player1"))
-
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
     updateBall(context, ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current);
     // updatePaddleR(context, paddleRRef.current); //old computer paddle code

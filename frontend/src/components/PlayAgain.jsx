@@ -6,8 +6,13 @@ const PlayAgain = (props) => {
     return (
         trigger ?
         <div className="playagain-card">
-            <p className="playagain-content" onClick={() => {resetGame()}}>Play Again?</p>
-            <Link onClick={() => {resetGame()}} className="playagain-content" to="/"><p>Exit Game</p></Link>
+            <p className="playagain-content" onClick={() => {
+                resetGame()
+                }}>Play Again?</p>
+            <Link onClick={() => {
+                resetGame()
+                localStorage.clear()
+                }} className="playagain-content" to="/"><p>Exit Game</p></Link>
         </div> : <h2>Press Enter to Start</h2>
     )
 }

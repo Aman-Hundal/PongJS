@@ -3,7 +3,7 @@ const Players = (props) => {
   
   return (
     <div>
-      <h1>{P1.name} vs. {P2.name}</h1>
+      <h1>{P1} vs. {P2}</h1>
     </div>
   )
 };

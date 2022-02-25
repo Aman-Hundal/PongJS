@@ -28,6 +28,8 @@ const Canvas = function(props) {
       return;
     }
 
+    console.log("NAME", localStorage.getItem("player1"))
+
     const context = canvas.getContext('2d'); //obtains the rendering context and its drawing functions
     updateBall(context, ballRef.current, paddleLRef.current, paddleRRef.current, scoreRef.current);
     // updatePaddleR(context, paddleRRef.current); //old computer paddle code
@@ -51,7 +53,7 @@ const Canvas = function(props) {
 
   return(
     <div>
-    <Players P1={P1} P2={P2} />
+    <Players P1={localStorage.getItem("player1")} P2={localStorage.getItem("player2")} />
     <Timer mins={mins} secs={secs} animateTimer={animateTimer} />
     <Score scoreP1={P1.score} scoreP2={P2.score} />
     <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >

@@ -22,6 +22,7 @@ const UserFormP2 = (props) => {
             <div className="form-button">
             <p className="form-button-content" onClick={() => {
                 setPlayerName(name)
+                localStorage.setItem("player2", name)
                 transition("START")}
                 }>Confirm</p>
             <p className="form-button-content" onClick={() => back()} >Back</p>

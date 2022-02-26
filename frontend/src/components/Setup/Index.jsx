@@ -7,7 +7,7 @@ import Start from './Start';
 import '../styles/Setup.css';
 
 const Index = (props) => {
-  const {matches} = props;
+  const {matches, start} = props;
   const {setNameP1, setNameP2} = props;
   const INDEX = "INDEX";
   const CONFIRMP1 = "CONFIRMP1";
@@ -21,7 +21,7 @@ const Index = (props) => {
       {mode === "INDEX" && <GameModeSelection transition={transition} />}
       {mode === CONFIRMP1 && <UserFormP1 setPlayerName={setNameP1} back={back} transition={transition} />}
       {mode === CONFIRMP2 && <UserFormP2 setPlayerName={setNameP2}  back={back} transition={transition} />}
-      {mode === START && <Start back={back} transition={transition} />}
+      {mode === START && <Start back={back} transition={transition} start={start} />}
       <RecentMatches matches={matches} />
     </div>
   )

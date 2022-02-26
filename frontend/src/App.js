@@ -16,17 +16,17 @@ function App() {
     animateTimer,
     newGame,
     gameOnEnd,
-    gameOnStart,
     winner,
     updateBall,
-    resetGame
+    resetGame,
+    startGame
   } = useAppData();
 
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Index setNameP1={setNameP1} setNameP2={setNameP2} start={gameOnStart} matches={state.matches}/>} />
+          <Route path="/" element={<Index setNameP1={setNameP1} setNameP2={setNameP2} start={startGame} matches={state.matches}/>} />
           <Route path="/play" element={<Canvas 
           updateBall={updateBall}
           resetGame={resetGame}
@@ -51,7 +51,7 @@ function App() {
 export default App;
 
 //TO DO:
-// when game starts (start game -> timer and score are reset)
+// when game starts (start game -> timer and score are reset) / when back is selected -> score and timer must be reset LIKE REFRESH DOES. 
+// Refresh breaks recent matches (have to hit refresh again for it to load)
 // timer only starts on press enter
 // styling of p1, and p2 forms + recent matches
-// when back is selected -> score and timer must be reset LIKE REFRESH DOES. 

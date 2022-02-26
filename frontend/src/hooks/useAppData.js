@@ -102,7 +102,7 @@ const useAppData = function(initial) {
       const newMatches = response.data;
       const player1 =  {...state.player1, score: state.player1.score = 0};
       const player2 = {...state.player2, score: state.player2.score = 0};
-      setState(prev => ({...prev, matches: newMatches, player1, player2, minutes: 1, seconds: 0, gameOn: true}));
+      setState(prev => ({...prev, matches: newMatches, player1, player2, minutes: 1, seconds: 0}));
     })
     .catch(error => console.error(error));
   }
@@ -145,9 +145,11 @@ const useAppData = function(initial) {
     }, 1000)
   }
 
-  // const startGame = () => {
-  //   setState(prev => ({...prev, player1, player2, minutes: 1, seconds: 0, gameOn: true}));
-  // }
+  const startGame = () => {
+    const player1 =  {...state.player1, score: state.player1.score = 0};
+    const player2 = {...state.player2, score: state.player2.score = 0};
+    setState(prev => ({...prev, player1, player2, minutes: 1, seconds: 0}));
+  }
   
   const newGame = (ball, paddleLeft, paddleRight, scoreRef, timerRef) => {
     scoreRef.scoreP1 = 0; 
@@ -165,13 +167,13 @@ const useAppData = function(initial) {
   }
   
   const gameOnEnd = () => {
+
+    if (!state.gameOn) {
+      return;
+    }
     setState({...state, gameOn: false});
   }
-  
-  const gameOnStart = () => {
-    setState({...state, gameOn: true});
-  }
-  
+
   const winner = function(player1, player2, minutes, seconds) {
     if (player1.score === 5) {
       return `${player1.name} is the winner!`;
@@ -210,10 +212,10 @@ const useAppData = function(initial) {
     animateTimer,
     newGame,
     gameOnEnd,
-    gameOnStart,
     winner,
     updateBall,
-    resetGame
+    resetGame,
+    startGame
   }
 
 }

@@ -51,6 +51,7 @@ function App() {
 export default App;
 
 //TO DO:
-// when back is selected -> score and timer must be reset LIKE REFRESH DOES. 
+// when game starts (start game -> timer and score are reset)
 // timer only starts on press enter
 // styling of p1, and p2 forms + recent matches
+// when back is selected -> score and timer must be reset LIKE REFRESH DOES. 

@@ -144,6 +144,10 @@ const useAppData = function(initial) {
       }
     }, 1000)
   }
+
+  // const startGame = () => {
+  //   setState(prev => ({...prev, player1, player2, minutes: 1, seconds: 0, gameOn: true}));
+  // }
   
   const newGame = (ball, paddleLeft, paddleRight, scoreRef, timerRef) => {
     scoreRef.scoreP1 = 0; 

@@ -75,7 +75,7 @@ const ballReset = (ball, context, paddleRight, paddleLeft) => {
   paddleLeft.y = 320;
 }
 
-const startGame = (ball) => {
+const startMotion = (ball) => {
   const direction = [1, -1];
   ball.vx = 5 * direction[Math.floor(Math.random() * direction.length)];
   ball.vy = 0;
@@ -109,7 +109,7 @@ const userInput = (paddleLeft, paddleRight, ball, key) => {
   }
 
   if(key === "Enter" && ball.vx === 0) {
-    startGame(ball);
+    startMotion(ball);
   }
 
 }
@@ -119,6 +119,6 @@ module.exports = {
   ballPaddleCollision,
   gameOver,
   ballReset,
-  startGame,
+  startMotion,
   userInput
 }

@@ -5,8 +5,8 @@ import { ballPaddleCollision, ballReset } from '../helpers/canvasHelpers';
 const useAppData = function(initial) {
   const [state, setState] = useState({
     matches: [{}],
-    player1: {name: "Player1", score: 0},
-    player2: {name: "Player2", score: 0},
+    player1: {name: localStorage.getItem("player1"), score: 0},
+    player2: {name: localStorage.getItem("player2"), score: 0},
     minutes: 1,
     seconds: 0,
     gameOn: true

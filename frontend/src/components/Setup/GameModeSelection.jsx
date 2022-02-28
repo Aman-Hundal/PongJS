@@ -4,7 +4,7 @@ const GameModeSelection = (props) => {
     const { transition} = props;
     return (
         <div className="gamemode-card">
-            <h2>Select a Game Mode </h2>
+            <h3>Select a Game Mode </h3>
             <ul id="gamemode-list">
                 <li className="list-item">Online(WIP)</li>
                 <br></br>

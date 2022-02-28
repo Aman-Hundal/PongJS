@@ -5,13 +5,22 @@ const UserFormP2 = (props) => {
     const { setPlayerName, transition, back } = props;
     const [name, setName] = useState("");
 
+    const handleKeyPress = (event) => {
+        if (event.keyCode === 13) {
+            setPlayerName(name);
+            localStorage.setItem("player2", name);
+            transition("START");
+        }
+    }
+
     return (
         <main className="playerform">
             <div className="form-main">
-            <h2>Please Enter Player Two Name:</h2>
+            <h3>Please Enter Player Two Name:</h3>
             <form onSubmit={event => setName(event)} autoComplete="off">
                 <input
-                onChange={event => setName(event.target.value)} 
+                onChange={event => setName(event.target.value)}
+                onKeyDown={event => handleKeyPress(event)}  
                 name="Player Name:"
                 placeholder=""
                 type="text"

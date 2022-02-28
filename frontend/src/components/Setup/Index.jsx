@@ -17,7 +17,7 @@ const Index = (props) => {
   
   return (
     <div>
-      <h1>Welcome to Pong</h1>
+      <h1>Welcome to Pong (v1.0)</h1>
       {mode === "INDEX" && <GameModeSelection transition={transition} />}
       {mode === CONFIRMP1 && <UserFormP1 setPlayerName={setNameP1} back={back} transition={transition} />}
       {mode === CONFIRMP2 && <UserFormP2 setPlayerName={setNameP2}  back={back} transition={transition} />}

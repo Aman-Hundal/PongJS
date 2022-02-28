@@ -55,7 +55,7 @@ const useAppData = function(initial) {
   
     //paddle collision
     if (ballPaddleCollision(ball, paddleLeft)) {
-      ball.speed += 1;
+      ball.speed += 0.25;
       // console.log(ball.speed)
       let collidePoint = (ball.y - (paddleLeft.y + paddleLeft.h/2));
       collidePoint = collidePoint / (paddleLeft.h/2); //normalizing collide point between -1 and 1
@@ -74,7 +74,7 @@ const useAppData = function(initial) {
     }
     
     if (ballPaddleCollision(ball, paddleRight)) {
-      ball.speed += 1
+      ball.speed += 0.25;
       // console.log(ball.speed)
       let collidePoint = (ball.y - (paddleRight.y + paddleRight.h/2));
       collidePoint = collidePoint / (paddleRight.h/2); //normalizing collide point between -1 and 1
@@ -154,14 +154,14 @@ const useAppData = function(initial) {
     timerRef.mins = 1;
     timerRef.secs = 0;
     scoreRef.scoreP2 = 0;
-    ball.x = 700;
-    ball.y = 400;
+    ball.x = 640;
+    ball.y = 360;
     ball.vx = 0;
     ball.vy = 0;
     ball.speed = 5;
-    paddleRight.y = 320;
+    paddleRight.y = 280;
     // paddleRight.vy = 0;
-    paddleLeft.y = 320;
+    paddleLeft.y = 280;
   }
   
   const gameOnEnd = () => {

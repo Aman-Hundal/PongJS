@@ -12,12 +12,14 @@ import {  createBoard, gameOver, userInput } from '../helpers/canvasHelpers';
 const Canvas = function(props) {
   const {P1, P2, updateBall, mins, secs, animateTimer, gameOn, gameOnEnd, winner, resetGame} = props;
   const canvasRef = useRef(null);
-  const ballRef = useRef({x: 700, y: 400, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
-  const paddleRRef = useRef({x: 1355, y: 320, w: 11.2, h: 160, vy: 40}); //computer speed 15-20
-  const paddleLRef = useRef({x: 30, y: 320, w: 11.2, h: 160, vy: 40});
+  const ballRef = useRef({x: 640, y: 360, r: 10, vx: 0, vy: 0, speed: 5}); //speed 10 best, 14 max, 7 slow, 20 super
+  const paddleRRef = useRef({x: 1235, y: 280, w: 11.2, h: 160, vy: 40}); //computer speed 15-20
+  const paddleLRef = useRef({x: 30, y: 280, w: 11.2, h: 160, vy: 40});
   const scoreRef = useRef({scoreP1: P1.score, scoreP2: P2.score});
   const timerRef = useRef({mins: mins, secs: secs});
   let gameOnRef = useRef(gameOn);
+
+  console.log(ballRef.current.speed)
   // const fps = 30;
   // console.log("ref", gameOnRef.current);
   // console.log("state", gameOn);
@@ -54,7 +56,7 @@ const Canvas = function(props) {
     <Players P1={localStorage.getItem("player1")} P2={localStorage.getItem("player2")} />
     <Timer mins={mins} secs={secs} animateTimer={animateTimer} />
     <Score scoreP1={P1.score} scoreP2={P2.score} />
-    <canvas width="1400" height="800" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
+    <canvas width="1280" height="720" id="game-board" ref={canvasRef} tabIndex="0" onKeyDown={event => userInput(paddleLRef.current,paddleRRef.current, ballRef.current, event.key)} >
     </canvas>
     <Result winner={winner} P1={P1} P2={P2} mins={mins} secs={secs} />
     <PlayAgain trigger={P1.score === 5 || P2.score === 5 || (mins === 0 && secs === 0) ? true : null}  resetGame={() => {

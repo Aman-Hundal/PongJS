@@ -71,8 +71,8 @@ const ballReset = (ball, context, paddleRight, paddleLeft) => {
   ball.vx = 5 * direction[Math.floor(Math.random() * direction.length)];
   ball.vy = 0;
   ball.speed = 5;
-  paddleRight.y = 320;
-  paddleLeft.y = 320;
+  paddleRight.y = 280;
+  paddleLeft.y = 280;
 }
 
 const startMotion = (ball) => {
@@ -88,7 +88,7 @@ const userInput = (paddleLeft, paddleRight, ball, key) => {
   const paddleRTop = paddleRight.y;
   const paddleRBottom = paddleRight.y + paddleRight.h;
 
-  if (key === "s" && paddleLBottom < 800) {
+  if (key === "s" && paddleLBottom < 720) {
     paddleLeft.y += paddleLeft.vy;
     // console.log(paddleLeft)
   }
@@ -98,7 +98,7 @@ const userInput = (paddleLeft, paddleRight, ball, key) => {
     // console.log(paddle)
   }
 
-  if (key === "5" && paddleRBottom < 800) {
+  if (key === "5" && paddleRBottom < 720) {
     paddleRight.y += paddleRight.vy;
     // console.log(paddleLeft)
   }

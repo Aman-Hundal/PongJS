@@ -1,6 +1,7 @@
 #gamemode-list {
     list-style-type: none;
     cursor: pointer;
+    padding-right: 1.5em;
 }
 
 .playerform input {
@@ -13,7 +14,7 @@
 }
 
 .list-item {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .gamemode-card {
@@ -57,7 +58,7 @@
 
 .start-card-content {
     cursor: pointer;
-    font-size: 20px;
+    /* font-size: 15px; */
 }
 
 .start-card-content:hover {
@@ -66,7 +67,7 @@
 
 .start-card-link {
     cursor: pointer;
-    font-size: 20px;
+    /* font-size: 15px; */
     text-decoration: none;
     color: black;
 }

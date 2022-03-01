@@ -8,7 +8,7 @@ const useAppData = function(initial) {
     player1: {name: localStorage.getItem("player1"), score: 0},
     player2: {name: localStorage.getItem("player2"), score: 0},
     minutes: 1,
-    seconds: 0,
+    seconds: 30,
     gameOn: true
   });
   
@@ -102,7 +102,7 @@ const useAppData = function(initial) {
       const newMatches = response.data;
       const player1 =  {...state.player1, score: state.player1.score = 0};
       const player2 = {...state.player2, score: state.player2.score = 0};
-      setState(prev => ({...prev, matches: newMatches, player1, player2, minutes: 1, seconds: 0, gameOn: true}));
+      setState(prev => ({...prev, matches: newMatches, player1, player2, minutes: 1, seconds: 30, gameOn: true}));
     })
     .catch(error => console.error(error));
   }

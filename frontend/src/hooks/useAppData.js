@@ -12,7 +12,7 @@ const useAppData = function(initial) {
     gameOn: true
   });
   
-  const baseURL = "http://localhost:3001";
+  const baseURL = "http://localhost:5000";
   
   useEffect(() => {
     const matchesPromise = axios.get(baseURL+"/matches");

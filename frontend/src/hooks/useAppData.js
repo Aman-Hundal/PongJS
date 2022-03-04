@@ -12,10 +12,10 @@ const useAppData = function(initial) {
     gameOn: true
   });
   
-  const baseURL = "http://localhost:5000";
+  // const baseURL = "http://localhost:5000";
   
   useEffect(() => {
-    const matchesPromise = axios.get(baseURL+"/matches");
+    const matchesPromise = axios.get("/matches");
     const promises = [matchesPromise];
   
     Promise.all(promises)
@@ -93,7 +93,7 @@ const useAppData = function(initial) {
   };
   
   const saveMatch = () => {
-    axios.post(baseURL+"/matches", {
+    axios.post("/matches", {
       player1: state.player1,
       player2: state.player2
     })

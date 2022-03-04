@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "cd frontend && npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -11,5 +12,8 @@
   "devDependencies": {
     "dotenv": "^14.2.0",
     "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "16.13.1"
   }
 }

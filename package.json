@@ -11,6 +11,5 @@
   "devDependencies": {
     "dotenv": "^14.2.0",
     "nodemon": "^2.0.15"
-  },
-  "proxy": "http://localhost:5000"
+  }
 }

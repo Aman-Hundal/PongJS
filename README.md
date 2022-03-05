@@ -3,7 +3,7 @@
 ## Setup
 
 ### Single Player
-Play the single player version here: https://pure-spire-86215.herokuapp.com/
+Play v1.0.0 here: https://pure-spire-86215.herokuapp.com/
 
 Single player mode allows users to play to 5 points, and timer set to 2 minutes. Player One uses WASD keys and Player Two uses 8456 keys to control their paddles. Pong Game was created with HTML canvas and simple ball collision physics were implemented allowing users to aim their shots.
 

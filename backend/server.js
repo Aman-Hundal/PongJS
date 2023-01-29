@@ -1,11 +1,11 @@
-require('dotenv').config();
+require('dotenv').config({ path: "../.env" });
 const express = require('express');
 const app = express();
 const matches = require('./routes/matches');
 const morgan = require('morgan');
 const path = require('path');
 const mongoose = require('mongoose');  // ODM system for MongoDB (creates models for collections and etc)
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 const dbURL = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.nilng.mongodb.net/${process.env.MONGODB_HOST}?retryWrites=true&w=majority`;
 const cors = require('cors');
 

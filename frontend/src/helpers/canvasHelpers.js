@@ -98,12 +98,12 @@ const userInput = (paddleLeft, paddleRight, ball, key) => {
     // console.log(paddle)
   }
 
-  if (key === "5" && paddleRBottom < 720) {
+  if (key === "k" && paddleRBottom < 720) {
     paddleRight.y += paddleRight.vy;
     // console.log(paddleLeft)
   }
 
-  if (key === "8" && paddleRTop > 0) {
+  if (key === "i" && paddleRTop > 0) {
     paddleRight.y -= paddleRight.vy;
     // console.log(paddle)
   }

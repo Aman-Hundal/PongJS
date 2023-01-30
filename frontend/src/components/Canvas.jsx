@@ -19,7 +19,7 @@ const Canvas = function(props) {
   const timerRef = useRef({mins: mins, secs: secs});
   let gameOnRef = useRef(gameOn);
 
-  console.log(ballRef.current.speed)
+  // console.log(ballRef.current.speed)
   // const fps = 30;
   // console.log("ref", gameOnRef.current);
   // console.log("state", gameOn);

@@ -13,7 +13,7 @@ const PlayAgain = (props) => {
                 resetGame()
                 localStorage.clear()
                 }} className="playagain-content" to="/"><p>Exit Game</p></Link>
-        </div> : <h2>Press Enter to Start</h2>
+        </div> : <h2 style={{padding: "1%"}}>Press Enter to Start</h2>
     )
 }
 

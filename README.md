@@ -3,7 +3,7 @@
 ## Setup
 
 ### Single Player
-Play v1.0.0 here: https://pure-spire-86215.herokuapp.com/
+Play v1.0.0 here: http://pongjs-production.s3-website.ca-central-1.amazonaws.com
 
 Single player mode allows users to play to 5 points, and timer set to 2 minutes. Player One uses W and S keys and Player Two uses I and K keys to control their paddles. Pong Game was created with HTML canvas and simple ball collision physics were implemented allowing users to aim their shots.
 

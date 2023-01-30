@@ -12,10 +12,10 @@ const useAppData = function(initial) {
     gameOn: true
   });
   
-  // const baseURL = "http://localhost:5000";
+  const baseURL = "http://api-pongjs.eba-gv2f7jvs.ca-central-1.elasticbeanstalk.com/";
   
   useEffect(() => {
-    const matchesPromise = axios.get("/matches");
+    const matchesPromise = axios.get(`${baseURL}matches`);
     const promises = [matchesPromise];
   
     Promise.all(promises)
@@ -93,7 +93,7 @@ const useAppData = function(initial) {
   };
   
   const saveMatch = () => {
-    axios.post("/matches", {
+    axios.post(`${baseURL}matches`, {
       player1: state.player1,
       player2: state.player2
     })

@@ -11,7 +11,7 @@ const useAppData = function(initial) {
     seconds: 30,
     gameOn: true
   });
-  
+  const [loading, setLoading] = useState(true);
   const baseURL = "http://api-pongjs.eba-gv2f7jvs.ca-central-1.elasticbeanstalk.com/";
   
   useEffect(() => {
@@ -22,10 +22,12 @@ const useAppData = function(initial) {
     .then((allData) => {
       // console.log(allData[0].data);
       setState(prev => ({...prev, matches: allData[0].data}));
+      setLoading(false);
     })
     .catch((error) => {
       console.error(error);
     })
+
   }, [])
 
   const updateBall = function(context, ball, paddleLeft, paddleRight, scoreRef) {
@@ -202,6 +204,7 @@ const useAppData = function(initial) {
 
   return {
     state,
+    loading,
     saveMatch,
     setNameP1,
     setNameP2,

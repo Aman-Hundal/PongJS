@@ -8,6 +8,7 @@ function App() {
 
   const {
     state,
+    loading,
     saveMatch,
     setNameP1,
     setNameP2,
@@ -26,7 +27,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Index setNameP1={setNameP1} setNameP2={setNameP2} start={gameOnStart} matches={state.matches}/>} />
+          <Route path="/" element={<Index setNameP1={setNameP1} setNameP2={setNameP2} start={gameOnStart} matches={state.matches} loading={loading}/>} />
           <Route path="/play" element={<Canvas 
           updateBall={updateBall}
           resetGame={resetGame}

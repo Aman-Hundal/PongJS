@@ -3,18 +3,20 @@ const router = express.Router();
 const Match = require('../db/models/matchModel');
 const { matchWinner } = require('../helpers/matchHelpers');
 
+//GET ROUTE
 router.get('/', (req, res) => {
-  Match.find() //method on the model itself.
-  .sort({_id: -1})
-  .limit(10)
-  .then((result) => {
-    res.send(result);
-  })
-  .catch((error) => {
-    console.error(error);
-  })
+  Match.find()
+    .sort({ _id: -1 })
+    .limit(10)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((error) => {
+      console.error(error);
+    })
 })
 
+//POST ROUTE
 router.post('/', (req, res) => {
   const data = req.body;
   const match = new Match({
@@ -25,17 +27,17 @@ router.post('/', (req, res) => {
   });
 
   match.save()
-  .then(() => {
-    Match.find()
-    .sort({_id: -1})
-    .limit(10)
-    .then((result) => {
-      res.send(result);
+    .then(() => {
+      Match.find()
+        .sort({ _id: -1 })
+        .limit(10)
+        .then((result) => {
+          res.send(result);
+        })
     })
-  })
-  .catch((error) => {
-    console.error(error);
-  })
+    .catch((error) => {
+      console.error(error);
+    })
 })
 
 module.exports = router;

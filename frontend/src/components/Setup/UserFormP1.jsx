@@ -7,7 +7,7 @@ const UserFormP1 = (props) => {
 
     const handleKeyPress = (event) => {
         if (event.keyCode === 13) {
-            setPlayerName(name);
+            setPlayerName(0, name);
             localStorage.setItem("player1", name);
             transition("CONFIRMP2");
         }
@@ -30,7 +30,7 @@ const UserFormP1 = (props) => {
             </div>
             <div className="form-button">
             <p className="form-button-content" onClick={() => {
-                setPlayerName(name)
+                setPlayerName(0, name)
                 localStorage.setItem("player1", name)
                 transition("CONFIRMP2")}
                 }>Confirm</p>

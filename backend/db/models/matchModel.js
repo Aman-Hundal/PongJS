@@ -20,6 +20,7 @@ const matchSchema = new Schema({ //creates instance of schema object
   }
 }, {timestamps: true});
 
-const Match = mongoose.model('Match', matchSchema); //first arg is name of model. KEEP IT SINGULAR, mongoose will pluralize it. The MongoDb collection is plural lower case like a table (called matchs). Second arg is the schema object that we want to base this model on
+//First arg is name of model. KEEP IT SINGULAR, mongoose will pluralize it. The MongoDb collection is plural lower case like a table (called matchs). Second arg is the schema object that we want to base this model on
+const Match = mongoose.model('Match', matchSchema); 
 
 module.exports = Match;

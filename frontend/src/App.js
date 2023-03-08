@@ -10,14 +10,11 @@ function App() {
     state,
     loading,
     saveMatch,
-    setNameP1,
-    setNameP2,
-    increaseScoreP1,
-    increaseScoreP2,
+    setPlayerName,
+    increasePlayerScore,
     animateTimer,
     newGame,
     gameOnEnd,
-    gameOnStart,
     winner,
     updateBall,
     resetGame
@@ -27,22 +24,21 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Index setNameP1={setNameP1} setNameP2={setNameP2} start={gameOnStart} matches={state.matches} loading={loading}/>} />
-          <Route path="/play" element={<Canvas 
-          updateBall={updateBall}
-          resetGame={resetGame}
-          winner={winner} 
-          newGame={newGame} 
-          gameOnEnd={gameOnEnd} 
-          gameOn={state.gameOn} 
-          P1={state.player1} 
-          P2={state.player2} 
-          increaseScoreP1={increaseScoreP1} 
-          increaseScoreP2={increaseScoreP2} 
-          mins={state.minutes} 
-          secs={state.seconds} 
-          animateTimer={animateTimer}
-          saveMatch={saveMatch} />} />
+          <Route path="/" element={<Index setPlayerName={setPlayerName} matches={state.matches} loading={loading} />} />
+          <Route path="/play" element={<Canvas
+            updateBall={updateBall}
+            resetGame={resetGame}
+            winner={winner}
+            newGame={newGame}
+            gameOnEnd={gameOnEnd}
+            gameOn={state.gameOn}
+            P1={state.players[0]}
+            P2={state.players[1]}
+            increasePlayerScore={increasePlayerScore}
+            mins={state.minutes}
+            secs={state.seconds}
+            animateTimer={animateTimer}
+            saveMatch={saveMatch} />} />
         </Routes>
       </div>
     </BrowserRouter>

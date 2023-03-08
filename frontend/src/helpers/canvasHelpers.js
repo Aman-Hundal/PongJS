@@ -18,7 +18,6 @@ const createBoard = (context, ball, rightPaddle, leftPaddle) => {
   context.fillStyle = 'white';
   context.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.w, rightPaddle.h);
   context.fill();
-
 };
 
 const ballPaddleCollision = (ball, paddle) => {
@@ -50,20 +49,6 @@ const gameOver = (scoreRef, timerRef) => {
   }
 }
 
-// const updatePaddleR = function(context, paddle) {
-//   paddle.y += paddle.vy;
-
-//   if (paddle.y >= context.canvas.height-160) {
-//     paddle.vy *= -1;
-//     // console.log(paddle)
-//   }
-
-//   if (paddle.y <= 0) {
-//     paddle.vy *= -1;
-//     // console.log(paddle)
-//   }
-// }; //old computer paddle code
-
 const ballReset = (ball, context, paddleRight, paddleLeft) => {
   const direction = [1, -1];
   ball.x = context.canvas.width/2;
@@ -90,22 +75,18 @@ const userInput = (paddleLeft, paddleRight, ball, key) => {
 
   if (key === "s" && paddleLBottom < 720) {
     paddleLeft.y += paddleLeft.vy;
-    // console.log(paddleLeft)
   }
 
   if (key === "w" && paddleLTop > 0) {
     paddleLeft.y -= paddleLeft.vy;
-    // console.log(paddle)
   }
 
   if (key === "k" && paddleRBottom < 720) {
     paddleRight.y += paddleRight.vy;
-    // console.log(paddleLeft)
   }
 
   if (key === "i" && paddleRTop > 0) {
     paddleRight.y -= paddleRight.vy;
-    // console.log(paddle)
   }
 
   if(key === "Enter" && ball.vx === 0) {
